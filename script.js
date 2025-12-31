@@ -1103,19 +1103,12 @@ function closeNewYearPopup() {
         popup.classList.remove('active');
         setTimeout(() => {
             popup.style.display = 'none';
-            // Don't show again this session
-            sessionStorage.setItem('newYearPopupShown', 'true');
         }, 500);
     }
 }
 
 // Function to show the popup with all effects
 function showNewYearPopup() {
-    // Check if already shown this session
-    if (sessionStorage.getItem('newYearPopupShown')) {
-        return;
-    }
-
     const popup = document.getElementById('newYearPopup');
     if (popup) {
         popup.style.display = 'flex';
