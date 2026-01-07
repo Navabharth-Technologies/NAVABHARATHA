@@ -35,50 +35,34 @@
     <meta name="twitter:title" content="Navabharatha - Sustainable Organization for Consistency">
     <meta name="twitter:description"
         content="Navabharatha Sustainable Organization for Consistency is a multidisciplinary consultancy dedicated to delivering high-quality government project support, certification services, and sustainability-driven solutions.">
-    <meta name="twitter:image" content="https://www.navabharatha.com/favicon_32 .png">
+    <meta name="twitter:image" content="https://www.navabharatha.com/favicon_32.png">
 
     <!-- Canonical URL -->
     <link rel="canonical" href="https://www.navabharatha.com/">
 
+    <!-- Preload Critical Assets -->
+    <link rel="preload" href="assets/navabharatha_logo.png" as="image">
+    <link rel="preload" href="style.css" as="style">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&display=swap" as="style">
+
     <!-- Stylesheets -->
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="notification.css">
-    <link rel="stylesheet" href="newyear.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        media="print" onload="this.media='all'">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&display=swap" rel="stylesheet">
-    <!-- Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Chart.js - Deferred for performance -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
 </head>
 
 <body>
-    <!-- New Year 2026 Popup -->
-    <div id="newYearPopup" class="new-year-popup-overlay">
-        <div class="new-year-popup">
-            <div class="new-year-popup-content">
-                <div class="new-year-logo">
-                    <img src="assets/navabharatha_logo.png" alt="Navabharatha">
-                </div>
-                <div class="new-year-header">
-                    <h2 class="new-year-title">HAPPY NEW YEAR</h2>
-                    <h3 class="new-year-year">2026</h3>
-                </div>
-                <div class="new-year-message">
-                    <p class="new-year-greeting">May this new year bring you prosperity, innovation, and limitless
-                        possibilities!</p>
-                    <p class="new-year-tagline">Thank you for being a valued part of our journey.</p>
-                    <p class="new-year-signature">- Team Navabharatha</p>
-                </div>
-                <button class="new-year-close-btn" onclick="closeNewYearPopup()">
-                    <span>Let's Celebrate Together!</span>
-                    <i class="fas fa-rocket"></i>
-                </button>
-            </div>
-        </div>
-        <!-- Fireworks/Crackers Container -->
-        <div class="fireworks-container" id="fireworksContainer"></div>
-    </div>
+
+    <!-- Skip to Content Link for Accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
 
     <!-- Custom Notification -->
     <div id="customNotification" class="custom-notification"></div>
@@ -89,7 +73,7 @@
         <div class="top-header">
             <div class="container top-header-container">
                 <a href="index.html" class="logo">
-                    <img src="assets/navabharatha_logo.png" alt="Navabharatha">
+                    <img src="assets/navabharatha_logo.png" alt="Navabharatha" width="130" height="130">
                 </a>
                 <div class="zed-branding">
                     <h3>NAVABHARATHA</h3>
@@ -126,7 +110,8 @@
             <div class="nav-right">
                 <!-- Language Selector -->
                 <div class="language-selector desktop-lang-selector">
-                    <button class="lang-btn" id="langBtn" aria-label="Select Language">
+                    <button class="lang-btn" id="langBtn" aria-label="Select Language" aria-expanded="false"
+                        aria-controls="langDropdown">
                         <i class="fas fa-globe"></i>
                         <span id="currentLang" class="current-lang-text">EN</span>
                         <i class="fas fa-chevron-down"></i>
@@ -137,7 +122,7 @@
                         <div class="lang-option" data-lang="hi">हिंदी (Hindi)</div>
                         <div class="lang-option" data-lang="ta">தமிழ் (Tamil)</div>
                         <div class="lang-option" data-lang="te">తెలుగు (Telugu)</div>
-                        <div class="lang-option" data-lang="mr">मराठी (Marathi)</div>
+                        <div class="lang-option" data-lang="mr">ಮರಾಠಿ (Marathi)</div>
                         <div class="lang-option" data-lang="ml">മലയാളം (Malayalam)</div>
                     </div>
                 </div>
@@ -153,293 +138,313 @@
                     </button>
                 </div>
 
-                <button class="hamburger" id="hamburger" aria-label="Menu">
+                <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false"
+                    aria-controls="navMenu">
                     <i class="fas fa-bars"></i>
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="container hero-container">
-            <div class="hero-content">
-                <h1 data-translate="hero_title_1">VISION TO INCREASE EFFICIENCY</h1>
-                <p data-translate="hero_description_1">Our organization offers a wide range of professional services,
-                    including certification assistance, documentation, audits, consulting, and technical assessments.
-                    With a focus on sustainability and innovation, we help institutions, businesses, and government
-                    bodies improve their operational standards, achieve regulatory compliance, and successfully complete
-                    critical development projects.</p>
-                <a href="#contact" class="btn btn-primary" data-translate="hero_cta">Get Started</a>
-            </div>
-            <div class="hero-image">
-                <img src="assets/final3.png" alt="Technology Solutions">
-            </div>
-        </div>
-    </section>
+    <!-- Main Content Wrapper -->
+    <main id="main-content">
 
-    <!-- About Section -->
-    <section id="about" class="about">
-        <div class="container about-container">
+        <!-- Hero Section -->
+        <section id="home" class="hero" aria-labelledby="hero-heading">
+            <div class="container hero-container">
+                <div class="hero-content">
+                    <h1 id="hero-heading" data-translate="hero_title_1">VISION TO INCREASE EFFICIENCY</h1>
+                    <p data-translate="hero_description_1">Our organization offers a wide range of professional
+                        services,
+                        including certification assistance, documentation, audits, consulting, and technical
+                        assessments.
+                        With a focus on sustainability and innovation, we help institutions, businesses, and government
+                        bodies improve their operational standards, achieve regulatory compliance, and successfully
+                        complete
+                        critical development projects.</p>
+                    <a href="#contact" class="btn btn-primary" data-translate="hero_cta">Get Started</a>
+                </div>
+                <div class="hero-image">
+                    <img src="assets/final3.png" alt="A collection of technology icons representing various services"
+                        width="520" height="520">
+                </div>
+            </div>
+        </section>
 
-            <div class="about-content animate-on-scroll">
-                <h2 data-translate="about_title">About Us</h2>
-                <p data-translate="about_description">Navabharatha Sustainable Organization for Consistently is a
-                    multidisciplinary consultancy dedicated to delivering high-quality government project support,
-                    certification services, and sustainability-driven solutions. We specialize in planning, executing,
-                    and managing government initiatives across various sectors, ensuring compliance, efficiency, and
-                    long-term impact. By combining expertise, transparency, and consistent performance, Navabharatha
-                    Sustainable Organization for Consistently aims to contribute to national progress and build a
-                    better, and more efficient future.</p>
-            </div>
-            <div class="about-image-section animate-on-scroll">
-                <div class="about-image">
-                    <img src="assets/about-image.png" alt="Founder">
-                </div>
-                <div class="founder-info">
-                    <h3 class="founder-name" data-translate="founder_name">DINESH J K</h3>
-                    <p class="founder-title" data-translate="founder_title">FOUNDER & CEO</p>
-                </div>
-            </div>
-        </div>
-    </section>
+        <!-- About Section -->
+        <section id="about" class="about">
+            <div class="container about-container">
 
-    <!-- Services Section -->
-    <section id="services" class="services">
-        <div class="container">
-            <div class="section-header animate-on-scroll">
-                <h2 data-translate="services_title">Our Services</h2>
-                <p data-translate="services_subtitle">Comprehensive solutions for your business needs</p>
-            </div>
-            <div class="services-slider-container">
-                <button class="scroll-btn prev-btn" aria-label="Scroll Left"><i
-                        class="fas fa-chevron-left"></i></button>
-                <div class="services-grid" id="servicesGrid">
-                    <div class="service-card animate-on-scroll delay-100" id="service-zed-certification">
-                        <div class="icon"><i class="fas fa-certificate"></i></div>
-                        <h3 data-translate="service1_title">Zed Certification</h3>
-                        <p data-translate="service1_description">ZED Certification (Zero Defect Zero Effect) is a
-                            Government of India initiative that helps MSMEs improve product quality and reduce
-                            environmental impact. It certifies that a business follows high-quality manufacturing
-                            practices while being environment-friendly, efficient, and compliant with standards.</p>
-                        <a href="certification.html" class="learn-more-btn"
-                            style="display: inline-block; margin-top: 15px; color: var(--primary-color); font-weight: 600; text-decoration: none;"><span
-                                data-translate="learn_more">Learn More</span> <i class="fas fa-arrow-right"
-                                style="font-size: 0.8em; margin-left: 5px;"></i></a>
+                <div class="about-content animate-on-scroll">
+                    <h2 data-translate="about_title">About Us</h2>
+                    <p data-translate="about_description">Navabharatha Sustainable Organization for Consistently is a
+                        multidisciplinary consultancy dedicated to delivering high-quality government project support,
+                        certification services, and sustainability-driven solutions. We specialize in planning,
+                        executing,
+                        and managing government initiatives across various sectors, ensuring compliance, efficiency, and
+                        long-term impact. By combining expertise, transparency, and consistent performance, Navabharatha
+                        Sustainable Organization for Consistently aims to contribute to national progress and build a
+                        better, and more efficient future.</p>
+                </div>
+                <div class="about-image-section animate-on-scroll">
+                    <div class="about-image">
+                        <img src="assets/about-image.png" alt="Founder" loading="lazy">
                     </div>
-                    <div class="service-card animate-on-scroll delay-200" id="service-zed-consulting">
-                        <div class="icon"><i class="fas fa-handshake"></i></div>
-                        <h3 data-translate="service5_title">Zed Consulting</h3>
-                        <p data-translate="service5_description">ZED Consulting is a professional service that helps
-                            businesses prepare for and achieve ZED Certification by guiding them through process
-                            improvements, documentation, compliance requirements, and best practices. It supports MSMEs
-                            in improving quality, efficiency, and sustainability as per ZED standards.</p>
-                        <a href="consulting.html" class="learn-more-btn"
-                            style="display: inline-block; margin-top: 15px; color: var(--primary-color); font-weight: 600; text-decoration: none;"><span
-                                data-translate="learn_more">Learn More</span> <i class="fas fa-arrow-right"
-                                style="font-size: 0.8em; margin-left: 5px;"></i></a>
-                    </div>
-                    <div class="service-card animate-on-scroll delay-300" id="service-zed-assessment">
-                        <div class="icon"><i class="fas fa-clipboard-check"></i></div>
-                        <h3 data-translate="service4_title">Zed Assessment</h3>
-                        <p data-translate="service4_description">ZED Assessment is the evaluation process where a
-                            business’s quality systems, processes, and environmental practices are reviewed to check
-                            their readiness and compliance with ZED Certification standards. It identifies gaps and
-                            improvement areas before certification.</p>
-                        <a href="assessment.html" class="learn-more-btn"
-                            style="display: inline-block; margin-top: 15px; color: var(--primary-color); font-weight: 600; text-decoration: none;"><span
-                                data-translate="learn_more">Learn More</span> <i class="fas fa-arrow-right"
-                                style="font-size: 0.8em; margin-left: 5px;"></i></a>
-                    </div>
-                    <div class="service-card animate-on-scroll delay-200" id="service-software-solutions">
-                        <div class="icon"><i class="fas fa-laptop-code"></i></div>
-                        <h3 data-translate="service8_title">Software Solutions</h3>
-                        <p data-translate="service8_description">Software Solutions are customized digital applications
-                            and systems designed to automate processes, improve efficiency, and support business
-                            operations, helping organizations manage data, workflows, and decision-making effectively.
-                        </p>
-                        <a href="https://navabharathtechnologies.com/" target="_blank" class="visit-site-link"
-                            style="display: inline-block; margin-top: 15px; color: var(--primary-color); font-weight: 600; text-decoration: none;"><span
-                                data-translate="visit_site">Visit Site</span> <i class="fas fa-external-link-alt"
-                                style="font-size: 0.8em; margin-left: 5px;"></i></a>
-                    </div>
-                    <div class="service-card animate-on-scroll delay-100" id="service-iso">
-                        <div class="icon"><i class="fas fa-globe"></i></div>
-                        <h3 data-translate="service2_title">ISO</h3>
-                        <p data-translate="service2_description">ISO Certification is an internationally recognized
-                            certification that confirms an organization follows standardized processes for quality,
-                            safety, efficiency, or information security, helping improve credibility, consistency, and
-                            customer trust.</p>
-                        <div style="margin-top: 15px;"><span
-                                style="background: #f1f5f9; color: #64748b; padding: 6px 14px; border-radius: 99px; font-size: 0.8rem; font-weight: 600;"
-                                data-translate="coming_soon">Coming Soon</span></div>
-                    </div>
-                    <div class="service-card animate-on-scroll delay-200" id="service-isi">
-                        <div class="icon"><i class="fas fa-check-circle"></i></div>
-                        <h3 data-translate="service3_title">ISI</h3>
-                        <p data-translate="service3_description">ISI Certification is a certification issued by the
-                            Bureau of Indian Standards (BIS) that ensures products meet Indian safety, quality, and
-                            performance standards, making them safe and reliable for consumers.</p>
-                        <div style="margin-top: 15px;"><span
-                                style="background: #f1f5f9; color: #64748b; padding: 6px 14px; border-radius: 99px; font-size: 0.8rem; font-weight: 600;"
-                                data-translate="coming_soon">Coming Soon</span></div>
-                    </div>
-                    <div class="service-card animate-on-scroll delay-300" id="service-fssai">
-                        <div class="icon"><i class="fas fa-utensils"></i></div>
-                        <h3 data-translate="service6_title">FSSAI</h3>
-                        <p data-translate="service6_description">FSSAI Certification is a mandatory license issued by
-                            the Food Safety and Standards Authority of India that ensures food businesses comply with
-                            food safety, hygiene, and quality regulations, making food safe for consumption.</p>
-                        <div style="margin-top: 15px;"><span
-                                style="background: #f1f5f9; color: #64748b; padding: 6px 14px; border-radius: 99px; font-size: 0.8rem; font-weight: 600;"
-                                data-translate="coming_soon">Coming Soon</span></div>
-                    </div>
-                    <div class="service-card animate-on-scroll delay-100" id="service-business-consulting">
-                        <div class="icon"><i class="fas fa-briefcase"></i></div>
-                        <h3 data-translate="service7_title">Business Consulting</h3>
-                        <p data-translate="service7_description">Business Consulting is a professional service that
-                            helps organizations improve performance, solve business challenges, and achieve growth by
-                            providing expert guidance on strategy, operations, compliance, and process optimization.</p>
-                        <div style="margin-top: 15px;"><span
-                                style="background: #f1f5f9; color: #64748b; padding: 6px 14px; border-radius: 99px; font-size: 0.8rem; font-weight: 600;"
-                                data-translate="coming_soon">Coming Soon</span></div>
+                    <div class="founder-info">
+                        <h3 class="founder-name" data-translate="founder_name">DINESH J K</h3>
+                        <p class="founder-title" data-translate="founder_title">FOUNDER & CEO</p>
                     </div>
                 </div>
-                <button class="scroll-btn next-btn" aria-label="Scroll Right"><i
-                        class="fas fa-chevron-right"></i></button>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Dashboard Section (Draft) -->
-    <section id="dashboard" class="dashboard-section">
-        <div class="container">
-            <div class="section-header animate-on-scroll">
-                <h2 data-translate="dashboard_title">Live Dashboard</h2>
-                <p data-translate="dashboard_subtitle">Real-time analysis and updates</p>
+        <!-- Services Section -->
+        <section id="services" class="services">
+            <div class="container">
+                <div class="section-header animate-on-scroll">
+                    <h2 data-translate="services_title">Our Services</h2>
+                    <p data-translate="services_subtitle">Comprehensive solutions for your business needs</p>
+                </div>
+                <div class="services-slider-container">
+                    <button class="scroll-btn prev-btn" aria-label="Scroll Left"><i
+                            class="fas fa-chevron-left"></i></button>
+                    <div class="services-grid" id="servicesGrid">
+                        <div class="service-card animate-on-scroll delay-100" id="service-zed-certification">
+                            <div class="icon"><i class="fas fa-certificate"></i></div>
+                            <h3 data-translate="service1_title">Zed Certification</h3>
+                            <p data-translate="service1_description">ZED Certification (Zero Defect Zero Effect) is a
+                                Government of India initiative that helps MSMEs improve product quality and reduce
+                                environmental impact. It certifies that a business follows high-quality manufacturing
+                                practices while being environment-friendly, efficient, and compliant with standards.</p>
+                            <a href="certification.html" class="learn-more-btn"
+                                style="display: inline-block; margin-top: 15px; color: var(--primary-color); font-weight: 600; text-decoration: none;"><span
+                                    data-translate="learn_more">Learn More</span> <i class="fas fa-arrow-right"
+                                    style="font-size: 0.8em; margin-left: 5px;"></i></a>
+                        </div>
+                        <div class="service-card animate-on-scroll delay-200" id="service-zed-consulting">
+                            <div class="icon"><i class="fas fa-handshake"></i></div>
+                            <h3 data-translate="service5_title">Zed Consulting</h3>
+                            <p data-translate="service5_description">ZED Consulting is a professional service that helps
+                                businesses prepare for and achieve ZED Certification by guiding them through process
+                                improvements, documentation, compliance requirements, and best practices. It supports
+                                MSMEs
+                                in improving quality, efficiency, and sustainability as per ZED standards.</p>
+                            <a href="consulting.html" class="learn-more-btn"
+                                style="display: inline-block; margin-top: 15px; color: var(--primary-color); font-weight: 600; text-decoration: none;"><span
+                                    data-translate="learn_more">Learn More</span> <i class="fas fa-arrow-right"
+                                    style="font-size: 0.8em; margin-left: 5px;"></i></a>
+                        </div>
+                        <div class="service-card animate-on-scroll delay-300" id="service-zed-assessment">
+                            <div class="icon"><i class="fas fa-clipboard-check"></i></div>
+                            <h3 data-translate="service4_title">Zed Assessment</h3>
+                            <p data-translate="service4_description">ZED Assessment is the evaluation process where a
+                                business’s quality systems, processes, and environmental practices are reviewed to check
+                                their readiness and compliance with ZED Certification standards. It identifies gaps and
+                                improvement areas before certification.</p>
+                            <a href="assessment.html" class="learn-more-btn"
+                                style="display: inline-block; margin-top: 15px; color: var(--primary-color); font-weight: 600; text-decoration: none;"><span
+                                    data-translate="learn_more">Learn More</span> <i class="fas fa-arrow-right"
+                                    style="font-size: 0.8em; margin-left: 5px;"></i></a>
+                        </div>
+                        <div class="service-card animate-on-scroll delay-200" id="service-software-solutions">
+                            <div class="icon"><i class="fas fa-laptop-code"></i></div>
+                            <h3 data-translate="service8_title">Software Solutions</h3>
+                            <p data-translate="service8_description">Software Solutions are customized digital
+                                applications
+                                and systems designed to automate processes, improve efficiency, and support business
+                                operations, helping organizations manage data, workflows, and decision-making
+                                effectively.
+                            </p>
+                            <a href="https://navabharathtechnologies.com/" target="_blank" class="visit-site-link"
+                                style="display: inline-block; margin-top: 15px; color: var(--primary-color); font-weight: 600; text-decoration: none;"><span
+                                    data-translate="visit_site">Visit Site</span> <i class="fas fa-external-link-alt"
+                                    style="font-size: 0.8em; margin-left: 5px;"></i></a>
+                        </div>
+                        <div class="service-card animate-on-scroll delay-100" id="service-iso">
+                            <div class="icon"><i class="fas fa-globe"></i></div>
+                            <h3 data-translate="service2_title">ISO</h3>
+                            <p data-translate="service2_description">ISO Certification is an internationally recognized
+                                certification that confirms an organization follows standardized processes for quality,
+                                safety, efficiency, or information security, helping improve credibility, consistency,
+                                and
+                                customer trust.</p>
+                            <div style="margin-top: 15px;"><span
+                                    style="background: #f1f5f9; color: #64748b; padding: 6px 14px; border-radius: 99px; font-size: 0.8rem; font-weight: 600;"
+                                    data-translate="coming_soon">Coming Soon</span></div>
+                        </div>
+                        <div class="service-card animate-on-scroll delay-200" id="service-isi">
+                            <div class="icon"><i class="fas fa-check-circle"></i></div>
+                            <h3 data-translate="service3_title">ISI</h3>
+                            <p data-translate="service3_description">ISI Certification is a certification issued by the
+                                Bureau of Indian Standards (BIS) that ensures products meet Indian safety, quality, and
+                                performance standards, making them safe and reliable for consumers.</p>
+                            <div style="margin-top: 15px;"><span
+                                    style="background: #f1f5f9; color: #64748b; padding: 6px 14px; border-radius: 99px; font-size: 0.8rem; font-weight: 600;"
+                                    data-translate="coming_soon">Coming Soon</span></div>
+                        </div>
+                        <div class="service-card animate-on-scroll delay-300" id="service-fssai">
+                            <div class="icon"><i class="fas fa-utensils"></i></div>
+                            <h3 data-translate="service6_title">FSSAI</h3>
+                            <p data-translate="service6_description">FSSAI Certification is a mandatory license issued
+                                by
+                                the Food Safety and Standards Authority of India that ensures food businesses comply
+                                with
+                                food safety, hygiene, and quality regulations, making food safe for consumption.</p>
+                            <div style="margin-top: 15px;"><span
+                                    style="background: #f1f5f9; color: #64748b; padding: 6px 14px; border-radius: 99px; font-size: 0.8rem; font-weight: 600;"
+                                    data-translate="coming_soon">Coming Soon</span></div>
+                        </div>
+                        <div class="service-card animate-on-scroll delay-100" id="service-business-consulting">
+                            <div class="icon"><i class="fas fa-briefcase"></i></div>
+                            <h3 data-translate="service7_title">Business Consulting</h3>
+                            <p data-translate="service7_description">Business Consulting is a professional service that
+                                helps organizations improve performance, solve business challenges, and achieve growth
+                                by
+                                providing expert guidance on strategy, operations, compliance, and process optimization.
+                            </p>
+                            <div style="margin-top: 15px;"><span
+                                    style="background: #f1f5f9; color: #64748b; padding: 6px 14px; border-radius: 99px; font-size: 0.8rem; font-weight: 600;"
+                                    data-translate="coming_soon">Coming Soon</span></div>
+                        </div>
+                    </div>
+                    <button class="scroll-btn next-btn" aria-label="Scroll Right"><i
+                            class="fas fa-chevron-right"></i></button>
+                </div>
             </div>
+        </section>
 
-            <div class="dashboard-grid">
-                <!-- Metric Cards -->
-                <div class="metric-card animate-on-scroll delay-100">
-                    <div class="metric-icon success"><i class="fas fa-handshake"></i></div>
-                    <div class="metric-info">
-                        <h4 data-translate="metric_partners">Business Partners FY(2025-2026)</h4>
-                        <span class="metric-value counter" data-target="0">0</span>
-                        <span class="metric-trend success"><i class="fas fa-arrow-up"></i> 0%</span>
-                    </div>
-                </div>
-                <div class="metric-card animate-on-scroll delay-200">
-                    <div class="metric-icon primary"><i class="fas fa-project-diagram"></i></div>
-                    <div class="metric-info">
-                        <h4 data-translate="metric_projects">Total Projects</h4>
-                        <span class="metric-value counter" data-target="0">0</span>
-                        <span class="metric-trend success"><i class="fas fa-arrow-up"></i> 0%</span>
-                    </div>
-                </div>
-                <div class="metric-card animate-on-scroll delay-300">
-                    <div class="metric-icon warning"><i class="fas fa-award"></i></div>
-                    <div class="metric-info">
-                        <h4 data-translate="metric_certifications">ZED Certifications FY(2025-2026)</h4>
-                        <span class="metric-value counter" data-target="0">0</span>
-                        <span class="metric-trend success"><i class="fas fa-arrow-up"></i> 0%</span>
-                    </div>
-                </div>
-                <div class="metric-card animate-on-scroll delay-100">
-                    <div class="metric-icon info"><i class="fas fa-users"></i></div>
-                    <div class="metric-info">
-                        <h4 data-translate="metric_clients">Happy Clients</h4>
-                        <span class="metric-value counter" data-target="0">0</span>
-                        <span class="metric-trend success"><i class="fas fa-arrow-up"></i> 0%</span>
-                    </div>
+        <!-- Dashboard Section (Draft) -->
+        <section id="dashboard" class="dashboard-section">
+            <div class="container">
+                <div class="section-header animate-on-scroll">
+                    <h2 data-translate="dashboard_title">Live Dashboard</h2>
+                    <p data-translate="dashboard_subtitle">Real-time analysis and updates</p>
                 </div>
 
-                <!-- Main Charts -->
-                <div class="chart-container-large animate-on-scroll">
-                    <div class="chart-header">
-                        <h3 data-translate="chart_performance">Operational Excellence Index</h3>
+                <div class="dashboard-grid">
+                    <!-- Metric Cards -->
+                    <div class="metric-card animate-on-scroll delay-100">
+                        <div class="metric-icon success"><i class="fas fa-handshake"></i></div>
+                        <div class="metric-info">
+                            <h4 data-translate="metric_partners">Business Partners FY(2025-2026)</h4>
+                            <span class="metric-value counter" data-target="0">0</span>
+                            <span class="metric-trend success"><i class="fas fa-arrow-up"></i> 0%</span>
+                        </div>
                     </div>
-                    <canvas id="performanceChart"></canvas>
-                </div>
+                    <div class="metric-card animate-on-scroll delay-200">
+                        <div class="metric-icon primary"><i class="fas fa-project-diagram"></i></div>
+                        <div class="metric-info">
+                            <h4 data-translate="metric_projects">Total Projects</h4>
+                            <span class="metric-value counter" data-target="0">0</span>
+                            <span class="metric-trend success"><i class="fas fa-arrow-up"></i> 0%</span>
+                        </div>
+                    </div>
+                    <div class="metric-card animate-on-scroll delay-300">
+                        <div class="metric-icon warning"><i class="fas fa-award"></i></div>
+                        <div class="metric-info">
+                            <h4 data-translate="metric_certifications">ZED Certifications FY(2025-2026)</h4>
+                            <span class="metric-value counter" data-target="0">0</span>
+                            <span class="metric-trend success"><i class="fas fa-arrow-up"></i> 0%</span>
+                        </div>
+                    </div>
+                    <div class="metric-card animate-on-scroll delay-100">
+                        <div class="metric-icon info"><i class="fas fa-users"></i></div>
+                        <div class="metric-info">
+                            <h4 data-translate="metric_clients">Happy Clients</h4>
+                            <span class="metric-value counter" data-target="0">0</span>
+                            <span class="metric-trend success"><i class="fas fa-arrow-up"></i> 0%</span>
+                        </div>
+                    </div>
 
-                <div class="chart-container-side animate-on-scroll">
-                    <div class="chart-header">
-                        <h3 data-translate="chart_services">ZED Certification Progress</h3>
-                        <!-- Year selector removed as chart now shows all years -->
+                    <!-- Main Charts -->
+                    <div class="chart-container-large animate-on-scroll">
+                        <div class="chart-header">
+                            <h3 data-translate="chart_performance">Operational Excellence Index</h3>
+                        </div>
+                        <canvas id="performanceChart"></canvas>
                     </div>
-                    <canvas id="serviceChart"></canvas>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <div class="container contact-container">
-            <div class="contact-info animate-on-scroll">
-                <h2 data-translate="contact_title">Contact Us</h2>
-                <p data-translate="contact_subtitle">Get in touch with us today.</p>
-                <div class="contact-details">
-                    <div class="detail-item">
-                        <i class="fas fa-envelope"></i>
-                        <span>contact@navabharatha.com</span>
-                    </div>
-                    <div class="detail-item">
-                        <i class="fas fa-phone"></i>
-                        <span>+91-8213554589 <br>+91-8850120709</span>
-                    </div>
-                    <div class="detail-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span>No.15, JTK Layout, Kuvempu Nagar,<br> Mysore, Karnataka - 570023</span>
+                    <div class="chart-container-side animate-on-scroll">
+                        <div class="chart-header">
+                            <h3 data-translate="chart_services">ZED Certification Progress</h3>
+                            <!-- Year selector removed as chart now shows all years -->
+                        </div>
+                        <canvas id="serviceChart"></canvas>
                     </div>
                 </div>
             </div>
-            <div class="contact-form animate-on-scroll">
-                <form>
-                    <div class="form-group">
-                        <label for="name" data-translate="form_name">Name</label>
-                        <input type="text" id="name" name="name" required>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact">
+            <div class="container contact-container">
+                <div class="contact-info animate-on-scroll">
+                    <h2 data-translate="contact_title">Contact Us</h2>
+                    <p data-translate="contact_subtitle">Get in touch with us today.</p>
+                    <div class="contact-details">
+                        <div class="detail-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>contact@navabharatha.com</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+91-8213554589 <br>+91-8850120709</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>No.15, JTK Layout, Kuvempu Nagar,<br> Mysore, Karnataka - 570023</span>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="email" data-translate="form_email">Email</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="phone" data-translate="form_phone">Phone Number</label>
-                        <input type="tel" id="phone" name="phone" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="service" data-translate="form_service">Service Interested In</label>
-                        <select id="service" name="service" required>
-                            <option value="" disabled selected data-translate="form_select_service">Select a Service
-                            </option>
-                            <option value="Zed Certification" data-translate="service1_title">Zed Certification</option>
-                            <option value="ISO" data-translate="service2_title">ISO</option>
-                            <option value="ISI" data-translate="service3_title">ISI</option>
-                            <option value="Zed Assessment" data-translate="service4_title">Zed Assessment</option>
-                            <option value="Zed Consulting" data-translate="service5_title">Zed Consulting</option>
-                            <option value="FSSAI" data-translate="service6_title">FSSAI</option>
-                            <option value="Business Consulting" data-translate="service7_title">Business Consulting
-                            </option>
-                            <option value="Software Solutions" data-translate="service8_title">Software Solutions
-                            </option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="message" data-translate="form_message">Message</label>
-                        <textarea id="message" name="message" rows="4" required></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary" data-translate="form_submit">Send Message</button>
-                </form>
+                </div>
+                <div class="contact-form animate-on-scroll">
+                    <form>
+                        <div class="form-group">
+                            <label for="name" data-translate="form_name">Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" data-translate="form_email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone" data-translate="form_phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="service" data-translate="form_service">Service Interested In</label>
+                            <select id="service" name="service" required>
+                                <option value="" disabled selected data-translate="form_select_service">Select a Service
+                                </option>
+                                <option value="Zed Certification" data-translate="service1_title">Zed Certification
+                                </option>
+                                <option value="ISO" data-translate="service2_title">ISO</option>
+                                <option value="ISI" data-translate="service3_title">ISI</option>
+                                <option value="Zed Assessment" data-translate="service4_title">Zed Assessment</option>
+                                <option value="Zed Consulting" data-translate="service5_title">Zed Consulting</option>
+                                <option value="FSSAI" data-translate="service6_title">FSSAI</option>
+                                <option value="Business Consulting" data-translate="service7_title">Business Consulting
+                                </option>
+                                <option value="Software Solutions" data-translate="service8_title">Software Solutions
+                                </option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message" data-translate="form_message">Message</label>
+                            <textarea id="message" name="message" rows="4" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" data-translate="form_submit">Send Message</button>
+                    </form>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+
+    </main>
 
     <!-- Footer -->
     <footer>
         <div class="footer-content">
             <div class="footer-column footer-logo-section">
-                <img src="assets/navabharatha_logo.png" alt="Navabharatha Logo">
+                <img src="assets/navabharatha_logo.png" alt="Navabharatha Logo" loading="lazy" width="150" height="150">
                 <p class="footer-tagline" data-translate="footer_tagline">Vision to Increase Efficiency</p>
             </div>
             <div class="footer-column" style="flex: 0 0 200px;">
@@ -478,10 +483,12 @@
                 </div>
             </div>
         </div>
-    </footer>
+        </main>
 
-    <script src="translations.js"></script>
-    <script src="script.js"></script>
+        <!-- Footer -->
+
+        <script src="translations.js"></script>
+        <script src="script.js"></script>
 </body>
 
 </html>

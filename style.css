@@ -61,6 +61,35 @@ body {
     overflow-x: hidden;
 }
 
+/* Accessibility Styles */
+.skip-link {
+    position: absolute;
+    top: -100px;
+    left: 20px;
+    background: var(--accent-color);
+    color: var(--primary-dark);
+    padding: 10px 20px;
+    z-index: 9999;
+    font-weight: 700;
+    transition: top 0.3s;
+    border-radius: 0 0 8px 8px;
+}
+
+.skip-link:focus {
+    top: 0;
+}
+
+/* Custom Focus Ring for Accessibility */
+:focus-visible {
+    outline: 3px solid var(--accent-color);
+    outline-offset: 3px;
+}
+
+/* For browsers that don't support focus-visible */
+:focus:not(:focus-visible) {
+    outline: none;
+}
+
 /* Typography Overrides */
 h1,
 h2,
@@ -269,7 +298,8 @@ button {
 
 .logo img {
     height: 130px;
-    /* Significantly larger */
+    width: 130px;
+    object-fit: contain;
     filter: drop-shadow(0 0 15px rgba(229, 176, 40, 0.6));
     /* Gold glow highlight */
     transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -797,9 +827,12 @@ header {
 .about-image img {
     position: relative;
     width: 100%;
+    height: 350px;
+    display: block;
     border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--shadow-lg);
     z-index: 1;
+    object-fit: cover;
 }
 
 .about-content h2 {
@@ -827,8 +860,9 @@ header {
 
 .about-image {
     position: relative;
-    max-width: 500px;
     width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
 }
 
 .founder-info {
@@ -869,6 +903,8 @@ header {
     padding: 120px 0;
     background: #f1f5f9;
     position: relative;
+    content-visibility: auto;
+    contain-intrinsic-size: 1px 1200px;
 }
 
 .section-header {
@@ -1179,6 +1215,8 @@ header {
 .dashboard-section {
     padding: 100px 0;
     background: #f1f5f9;
+    content-visibility: auto;
+    contain-intrinsic-size: 1px 1000px;
 }
 
 .dashboard-grid {
@@ -1594,6 +1632,8 @@ footer {
     padding: 80px 0 30px;
     position: relative;
     overflow: hidden;
+    content-visibility: auto;
+    contain-intrinsic-size: 1px 400px;
 }
 
 .footer-container {
@@ -2277,6 +2317,8 @@ footer {
 
 .footer-logo-section img {
     height: 150px;
+    width: 150px;
+    object-fit: contain;
     margin-bottom: 20px;
     filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.2));
 }
@@ -2526,4 +2568,14 @@ footer {
 
 .language-selector.desktop-lang-selector .language-dropdown.active {
     transform: translateY(0);
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
 }

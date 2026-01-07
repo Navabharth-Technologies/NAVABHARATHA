@@ -57,6 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             dropdown.classList.toggle('active');
+            btn.setAttribute('aria-expanded', dropdown.classList.contains('active'));
         });
     });
 
@@ -65,6 +66,8 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('.language-dropdown').forEach(dropdown => {
             if (!dropdown.contains(e.target)) {
                 dropdown.classList.remove('active');
+                const btn = dropdown.closest('.language-selector').querySelector('.lang-btn');
+                if (btn) btn.setAttribute('aria-expanded', 'false');
             }
         });
     });
@@ -75,7 +78,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const selectedLang = option.getAttribute('data-lang');
             updateLanguage(selectedLang);
             localStorage.setItem('selectedLanguage', selectedLang);
-            document.querySelectorAll('.language-dropdown').forEach(d => d.classList.remove('active'));
+            document.querySelectorAll('.language-dropdown').forEach(d => {
+                d.classList.remove('active');
+                const btn = d.closest('.language-selector').querySelector('.lang-btn');
+                if (btn) btn.setAttribute('aria-expanded', 'false');
+            });
         });
     });
 
@@ -427,11 +434,13 @@ document.addEventListener('DOMContentLoaded', () => {
         hamburger.addEventListener('click', function (e) {
             e.stopPropagation();
             navMenu.classList.toggle('active');
-            console.log('Menu active:', navMenu.classList.contains('active'));
+            const isActive = navMenu.classList.contains('active');
+            hamburger.setAttribute('aria-expanded', isActive);
+            console.log('Menu active:', isActive);
 
             // Toggle icon between bars and times (close)
             const icon = hamburger.querySelector('i');
-            if (navMenu.classList.contains('active')) {
+            if (isActive) {
                 icon.classList.remove('fa-bars');
                 icon.classList.add('fa-times');
             } else {
@@ -444,6 +453,7 @@ document.addEventListener('DOMContentLoaded', () => {
         navLinks.forEach(link => {
             link.addEventListener('click', () => {
                 navMenu.classList.remove('active');
+                hamburger.setAttribute('aria-expanded', 'false');
                 const icon = hamburger.querySelector('i');
                 icon.classList.remove('fa-times');
                 icon.classList.add('fa-bars');
@@ -454,6 +464,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.addEventListener('click', (e) => {
             if (!navMenu.contains(e.target) && !hamburger.contains(e.target) && navMenu.classList.contains('active')) {
                 navMenu.classList.remove('active');
+                hamburger.setAttribute('aria-expanded', 'false');
                 const icon = hamburger.querySelector('i');
                 icon.classList.remove('fa-times');
                 icon.classList.add('fa-bars');
@@ -892,11 +903,25 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // Initialize Dashboard Features
-    initCharts();
-    initCounters();
+    // Initialize Dashboard Features with IntersectionObserver for performance
+    const dashboardSection = document.getElementById('dashboard');
+    if (dashboardSection) {
+        initCharts();
+        initCounters();
+
+        const dashboardObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    fetchDashboardData();
+                    dashboardObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        dashboardObserver.observe(dashboardSection);
+    }
+
     initScrollAnimations();
-    fetchDashboardData();
 });
 
 // Global Back Function
@@ -908,290 +933,4 @@ function goBack() {
     }
 }
 
-// ===================================
-// NEW YEAR 2026 POPUP FUNCTIONALITY
-// ===================================
 
-// Function to create confetti
-function createConfetti() {
-    const colors = ['#ffd700', '#ff6b6b', '#4ecdc4', '#ff8c42', '#a8e6cf', '#ff6f91', '#6c5ce7', '#fd79a8'];
-    const container = document.getElementById('fireworksContainer');
-    if (!container) return;
-
-    const confettiCount = 100;
-
-    for (let i = 0; i < confettiCount; i++) {
-        setTimeout(() => {
-            const confetti = document.createElement('div');
-            confetti.className = 'confetti-piece';
-            confetti.style.position = 'absolute';
-            confetti.style.left = Math.random() * 100 + '%';
-            confetti.style.top = '-10px';
-            confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-            confetti.style.width = (Math.random() * 8 + 6) + 'px';
-            confetti.style.height = (Math.random() * 8 + 6) + 'px';
-            confetti.style.pointerEvents = 'none';
-
-            // Random shapes
-            if (Math.random() > 0.5) {
-                confetti.style.borderRadius = '50%';
-            } else {
-                confetti.style.transform = 'rotate(' + (Math.random() * 360) + 'deg)';
-            }
-
-            confetti.style.animation = `confettiFall ${(Math.random() * 3 + 3)}s linear forwards`;
-            confetti.style.animationDelay = (Math.random() * 0.5) + 's';
-
-            container.appendChild(confetti);
-
-            setTimeout(() => {
-                confetti.remove();
-            }, 6000);
-        }, i * 30);
-    }
-}
-
-// Function to create fireworks bursts
-function createFireworkBurst(x, y) {
-    const colors = ['#ffd700', '#ff6b6b', '#4ecdc4', '#ff8c42', '#a8e6cf', '#6c5ce7'];
-    const container = document.getElementById('fireworksContainer');
-    if (!container) return;
-
-    const particleCount = 40;
-
-    for (let i = 0; i < particleCount; i++) {
-        const particle = document.createElement('div');
-        particle.className = 'firework-burst';
-        particle.style.position = 'absolute';
-        particle.style.left = x + 'px';
-        particle.style.top = y + 'px';
-        particle.style.width = '6px';
-        particle.style.height = '6px';
-        particle.style.borderRadius = '50%';
-        particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-        particle.style.pointerEvents = 'none';
-        particle.style.boxShadow = `0 0 10px ${colors[Math.floor(Math.random() * colors.length)]}`;
-
-        const angle = (Math.random() * Math.PI * 2);
-        const velocity = Math.random() * 120 + 60;
-        const tx = Math.cos(angle) * velocity;
-        const ty = Math.sin(angle) * velocity;
-
-        particle.style.setProperty('--tx', tx + 'px');
-        particle.style.setProperty('--ty', ty + 'px');
-
-        particle.animate([
-            { transform: 'translate(0, 0) scale(1)', opacity: 1 },
-            { transform: `translate(${tx}px, ${ty}px) scale(0)`, opacity: 0 }
-        ], {
-            duration: 1500 + Math.random() * 500,
-            easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
-        });
-
-        container.appendChild(particle);
-
-        setTimeout(() => {
-            particle.remove();
-        }, 2000);
-    }
-}
-
-// Function to create crackers shooting from sides
-function launchCracker(fromLeft = true) {
-    const container = document.getElementById('fireworksContainer');
-    if (!container) return;
-
-    const cracker = document.createElement('div');
-    cracker.className = 'cracker';
-    cracker.style.position = 'absolute';
-    cracker.style.width = '8px';
-    cracker.style.height = '8px';
-    cracker.style.borderRadius = '50%';
-    cracker.style.left = fromLeft ? '10%' : '90%';
-    cracker.style.bottom = '0';
-    cracker.style.pointerEvents = 'none';
-
-    if (fromLeft) {
-        cracker.style.background = 'linear-gradient(180deg, #ffd700 0%, #ff6b6b 100%)';
-    } else {
-        cracker.style.background = 'linear-gradient(180deg, #6c5ce7 0%, #4ecdc4 100%)';
-    }
-
-    cracker.style.boxShadow = '0 0 20px currentColor';
-    cracker.style.animation = 'crackerShoot 1.8s ease-out forwards';
-
-    container.appendChild(cracker);
-
-    // Create trail particles
-    const trailInterval = setInterval(() => {
-        const trail = document.createElement('div');
-        trail.className = 'cracker-particle';
-        trail.style.position = 'absolute';
-        trail.style.width = '4px';
-        trail.style.height = '4px';
-        trail.style.borderRadius = '50%';
-        trail.style.left = fromLeft ? '10%' : '90%';
-        trail.style.bottom = Math.random() * 200 + 'px';
-        trail.style.backgroundColor = fromLeft ? '#ffd700' : '#6c5ce7';
-        trail.style.opacity = '0.8';
-        trail.style.pointerEvents = 'none';
-        trail.style.animation = 'particleExplode 0.6s ease-out forwards';
-
-        const angle = Math.random() * Math.PI * 2;
-        const dist = Math.random() * 30 + 10;
-        trail.style.setProperty('--tx', Math.cos(angle) * dist + 'px');
-        trail.style.setProperty('--ty', Math.sin(angle) * dist + 'px');
-
-        container.appendChild(trail);
-
-        setTimeout(() => trail.remove(), 600);
-    }, 100);
-
-    // Create explosion at top
-    setTimeout(() => {
-        clearInterval(trailInterval);
-        const burstX = (fromLeft ? window.innerWidth * 0.1 : window.innerWidth * 0.9);
-        const burstY = window.innerHeight * 0.2;
-        createFireworkBurst(burstX, burstY);
-        cracker.remove();
-    }, 1800);
-}
-
-// Function to create continuous fireworks
-function createContinuousFireworks() {
-    const container = document.getElementById('fireworksContainer');
-    if (!container) return;
-
-    for (let i = 0; i < 8; i++) {
-        setTimeout(() => {
-            const x = Math.random() * window.innerWidth * 0.8 + window.innerWidth * 0.1;
-            const y = Math.random() * window.innerHeight * 0.4 + window.innerHeight * 0.1;
-            createFireworkBurst(x, y);
-        }, i * 600);
-    }
-}
-
-// Function to launch cracker sequences
-function launchCrackerSequence() {
-    // First wave
-    launchCracker(true);
-    setTimeout(() => launchCracker(false), 200);
-
-    // Second wave
-    setTimeout(() => {
-        launchCracker(true);
-        setTimeout(() => launchCracker(false), 150);
-    }, 1000);
-
-    // Third wave
-    setTimeout(() => {
-        launchCracker(true);
-        setTimeout(() => launchCracker(false), 100);
-    }, 2200);
-
-    // Fourth wave
-    setTimeout(() => {
-        launchCracker(true);
-        launchCracker(false);
-    }, 3500);
-}
-
-// Function to close the popup
-function closeNewYearPopup() {
-    const popup = document.getElementById('newYearPopup');
-    if (popup) {
-        popup.classList.remove('active');
-        setTimeout(() => {
-            popup.style.display = 'none';
-        }, 500);
-    }
-}
-
-// Function to show the popup with all effects
-function showNewYearPopup() {
-    const popup = document.getElementById('newYearPopup');
-    if (popup) {
-        popup.style.display = 'flex';
-
-        // Activate popup with a slight delay for smooth animation
-        setTimeout(() => {
-            popup.classList.add('active');
-        }, 100);
-
-        // Start confetti immediately
-        setTimeout(() => {
-            createConfetti();
-        }, 400);
-
-        // Launch crackers
-        setTimeout(() => {
-            launchCrackerSequence();
-        }, 800);
-
-        // Create fireworks
-        setTimeout(() => {
-            createContinuousFireworks();
-        }, 1200);
-
-        // Create second wave of confetti
-        setTimeout(() => {
-            createConfetti();
-        }, 3000);
-
-        // Additional fireworks burst
-        setTimeout(() => {
-            createContinuousFireworks();
-        }, 5000);
-    }
-}
-
-// Add additional CSS animations via JavaScript
-const newYearStyles = document.createElement('style');
-newYearStyles.textContent = `
-    @keyframes crackerShoot {
-        0% {
-            bottom: 0;
-            opacity: 1;
-        }
-        100% {
-            bottom: 80vh;
-            opacity: 0;
-        }
-    }
-
-    @keyframes particleExplode {
-        0% {
-            transform: translate(0, 0) scale(1);
-            opacity: 1;
-        }
-        100% {
-            transform: translate(var(--tx), var(--ty)) scale(0);
-            opacity: 0;
-        }
-    }
-
-    @keyframes confettiFall {
-        0% {
-            transform: translateY(0) rotate(0deg);
-            opacity: 1;
-        }
-        100% {
-            transform: translateY(100vh) rotate(720deg);
-            opacity: 0;
-        }
-    }
-
-    .new-year-popup-overlay {
-        display: none;
-    }
-`;
-document.head.appendChild(newYearStyles);
-
-// Show popup when page loads
-window.addEventListener('load', () => {
-    // Show immediately without delay
-    showNewYearPopup();
-});
-
-// Make closeNewYearPopup available globally
-window.closeNewYearPopup = closeNewYearPopup;
