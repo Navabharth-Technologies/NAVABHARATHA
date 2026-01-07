@@ -4,6 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#0E5E72">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
 
     <!-- Title and Description -->
     <title>Navabharatha - Sustainable Organization for Consistency</title>
@@ -40,23 +44,41 @@
     <!-- Canonical URL -->
     <link rel="canonical" href="https://www.navabharatha.com/">
 
+    <!-- DNS Prefetch for External Resources -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+
+    <!-- Preconnect for Critical Resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <!-- Preload Critical Assets -->
     <link rel="preload" href="assets/navabharatha_logo.png" as="image">
     <link rel="preload" href="style.css" as="style">
+    <link rel="preload" href="assets/final3.png" as="image">
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&display=swap" as="style">
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="notification.css">
 
+    <!-- Font Awesome - Load asynchronously -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         media="print" onload="this.media='all'">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&display=swap" rel="stylesheet">
+    <noscript>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    </noscript>
+
+
+    <!-- Google Fonts - Optimized Loading -->
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&display=swap" rel="stylesheet"
+        media="print" onload="this.media='all'">
 
     <!-- Chart.js - Deferred for performance -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+
 </head>
 
 <body>
@@ -73,7 +95,8 @@
         <div class="top-header">
             <div class="container top-header-container">
                 <a href="index.html" class="logo">
-                    <img src="assets/navabharatha_logo.png" alt="Navabharatha" width="130" height="130">
+                    <img src="assets/navabharatha_logo.png" alt="Navabharatha" width="130" height="130"
+                        fetchpriority="high">
                 </a>
                 <div class="zed-branding">
                     <h3>NAVABHARATHA</h3>
@@ -166,7 +189,7 @@
                 </div>
                 <div class="hero-image">
                     <img src="assets/final3.png" alt="A collection of technology icons representing various services"
-                        width="520" height="520">
+                        width="520" height="520" fetchpriority="high">
                 </div>
             </div>
         </section>
@@ -489,6 +512,7 @@
 
         <script src="translations.js"></script>
         <script src="script.js"></script>
+        <script src="performance.js" async></script>
 </body>
 
 </html>

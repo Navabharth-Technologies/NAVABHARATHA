@@ -59,6 +59,10 @@ body {
     color: var(--text-main);
     line-height: 1.7;
     overflow-x: hidden;
+    /* Performance optimizations */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeSpeed;
 }
 
 /* Accessibility Styles */
@@ -503,17 +507,17 @@ header {
 
 @keyframes pulse-red {
     0% {
-        transform: scale(1);
+        transform: scale3d(1, 1, 1);
         opacity: 1;
     }
 
     50% {
-        transform: scale(1.2);
+        transform: scale3d(1.2, 1.2, 1);
         opacity: 0.7;
     }
 
     100% {
-        transform: scale(1);
+        transform: scale3d(1, 1, 1);
         opacity: 1;
     }
 }
@@ -796,6 +800,10 @@ header {
     margin: 0 auto;
     filter: drop-shadow(0 10px 20px rgba(14, 94, 114, 0.1));
     mix-blend-mode: multiply;
+    /* Performance optimizations */
+    will-change: transform;
+    transform: translateZ(0);
+    contain: layout style paint;
 }
 
 .hero-image:hover img {
@@ -1014,6 +1022,10 @@ header {
     flex-direction: column;
     justify-content: space-between;
     /* Pushes content apart, but we might want button at bottom */
+    /* Performance optimizations */
+    will-change: transform, box-shadow;
+    transform: translateZ(0);
+    contain: layout style;
 }
 
 .service-card p {
