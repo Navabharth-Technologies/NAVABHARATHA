@@ -503,17 +503,17 @@ header {
 
 @keyframes pulse-red {
     0% {
-        transform: scale3d(1, 1, 1);
+        transform: scale(1);
         opacity: 1;
     }
 
     50% {
-        transform: scale3d(1.2, 1.2, 1);
+        transform: scale(1.2);
         opacity: 0.7;
     }
 
     100% {
-        transform: scale3d(1, 1, 1);
+        transform: scale(1);
         opacity: 1;
     }
 }
@@ -785,6 +785,12 @@ header {
     width: 100%;
     max-width: 520px;
     height: auto;
+    /* animation: float 6s ease-in-out infinite; */
+    /* Continuous floating removed */
+    /* Removed card styling for seamless integration */
+    /* border-radius: var(--radius-lg); */
+    /* box-shadow: var(--shadow-lg); */
+    /* transform: perspective(1000px) rotateY(-5deg); */
     transition: transform 0.5s ease;
     display: block;
     margin: 0 auto;
@@ -987,9 +993,12 @@ header {
 
 .service-card {
     width: 320px;
+    /* Fixed width to prevent text overflow stretching */
     max-width: 100%;
     flex: 0 0 auto;
+    /* Prevent growing/shrinking */
     scroll-snap-align: center;
+    /* Center snapping */
     background: white;
     border-radius: var(--radius-lg);
     padding: 40px 32px;
@@ -999,9 +1008,12 @@ header {
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     position: relative;
     overflow: visible;
+    /* details may expand */
+    /* height: fit-content;  Removed to allow flex stretch for equal height */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    /* Pushes content apart, but we might want button at bottom */
 }
 
 .service-card p {
@@ -2382,6 +2394,29 @@ footer {
     background: #f59e0b;
     color: #031b26;
     transform: translateY(-3px);
+}
+
+.social-icon.facebook:hover {
+    background: #1877F2;
+    color: white;
+}
+
+.social-icon.linkedin:hover {
+    background: #0077B5;
+    color: white;
+}
+
+.social-icon.instagram:hover {
+    background: #f09433;
+    background: -moz-linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    background: -webkit-linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    color: white;
+}
+
+.social-icon.youtube:hover {
+    background: #FF0000;
+    color: white;
 }
 
 /* Get Certified Button */
