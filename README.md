@@ -1,6 +1,6 @@
-# Navabharath Technologies Website
+# Navabharatha  Website
 
-This is a static HTML/CSS/JS website for Navabharath Technologies, designed based on the provided Figma mockup.
+This is a static HTML/CSS/JS website for Navabharatha, designed based on the provided Figma mockup.
 
 ## Project Structure
 
@@ -27,3 +27,4 @@ Since this is a static website, you do not need any special server or installati
 
 - To change colors, edit the `:root` variables in `css/style.css`.
 - To update content, edit the text within `index.html`.
+
