@@ -57,7 +57,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             dropdown.classList.toggle('active');
-            btn.setAttribute('aria-expanded', dropdown.classList.contains('active'));
         });
     });
 
@@ -66,8 +65,6 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('.language-dropdown').forEach(dropdown => {
             if (!dropdown.contains(e.target)) {
                 dropdown.classList.remove('active');
-                const btn = dropdown.closest('.language-selector').querySelector('.lang-btn');
-                if (btn) btn.setAttribute('aria-expanded', 'false');
             }
         });
     });
@@ -78,11 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const selectedLang = option.getAttribute('data-lang');
             updateLanguage(selectedLang);
             localStorage.setItem('selectedLanguage', selectedLang);
-            document.querySelectorAll('.language-dropdown').forEach(d => {
-                d.classList.remove('active');
-                const btn = d.closest('.language-selector').querySelector('.lang-btn');
-                if (btn) btn.setAttribute('aria-expanded', 'false');
-            });
+            document.querySelectorAll('.language-dropdown').forEach(d => d.classList.remove('active'));
         });
     });
 
@@ -120,7 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Form submission handler
-    const form = document.querySelector('form');
+    const form = document.querySelector('#contactForm');
     if (form) {
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -434,13 +427,11 @@ document.addEventListener('DOMContentLoaded', () => {
         hamburger.addEventListener('click', function (e) {
             e.stopPropagation();
             navMenu.classList.toggle('active');
-            const isActive = navMenu.classList.contains('active');
-            hamburger.setAttribute('aria-expanded', isActive);
-            console.log('Menu active:', isActive);
+            console.log('Menu active:', navMenu.classList.contains('active'));
 
             // Toggle icon between bars and times (close)
             const icon = hamburger.querySelector('i');
-            if (isActive) {
+            if (navMenu.classList.contains('active')) {
                 icon.classList.remove('fa-bars');
                 icon.classList.add('fa-times');
             } else {
@@ -453,7 +444,6 @@ document.addEventListener('DOMContentLoaded', () => {
         navLinks.forEach(link => {
             link.addEventListener('click', () => {
                 navMenu.classList.remove('active');
-                hamburger.setAttribute('aria-expanded', 'false');
                 const icon = hamburger.querySelector('i');
                 icon.classList.remove('fa-times');
                 icon.classList.add('fa-bars');
@@ -464,7 +454,6 @@ document.addEventListener('DOMContentLoaded', () => {
         document.addEventListener('click', (e) => {
             if (!navMenu.contains(e.target) && !hamburger.contains(e.target) && navMenu.classList.contains('active')) {
                 navMenu.classList.remove('active');
-                hamburger.setAttribute('aria-expanded', 'false');
                 const icon = hamburger.querySelector('i');
                 icon.classList.remove('fa-times');
                 icon.classList.add('fa-bars');
@@ -580,38 +569,48 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (servicesGrid && prevBtn && nextBtn) {
 
-        const getScrollAmount = () => {
-            const card = servicesGrid.querySelector('.service-card');
-            if (!card) return 350; // Default fallback
-            const style = window.getComputedStyle(card);
-            const gap = 32; // Default desktop gap
-            // Try to measure actual gap or use estimation
-            return card.offsetWidth + gap;
+        const getAllCards = () => servicesGrid.querySelectorAll('.service-card');
+
+        const getCurrentIndex = () => {
+            const cards = getAllCards();
+            let closestIndex = 0;
+            let minDiff = Infinity;
+            cards.forEach((card, i) => {
+                const diff = Math.abs(card.offsetLeft - servicesGrid.scrollLeft);
+                if (diff < minDiff) {
+                    minDiff = diff;
+                    closestIndex = i;
+                }
+            });
+            return closestIndex;
+        };
+
+        const scrollToIndex = (index) => {
+            const cards = getAllCards();
+            const total = cards.length;
+            if (index < 0) index = 0;
+            if (index >= total) index = total - 1;
+            servicesGrid.scrollTo({
+                left: cards[index].offsetLeft,
+                behavior: 'smooth'
+            });
         };
 
         prevBtn.addEventListener('click', () => {
-            servicesGrid.scrollBy({
-                left: -getScrollAmount(),
-                behavior: 'smooth'
-            });
+            scrollToIndex(getCurrentIndex() - 1);
         });
 
         nextBtn.addEventListener('click', () => {
-            servicesGrid.scrollBy({
-                left: getScrollAmount(),
-                behavior: 'smooth'
-            });
+            scrollToIndex(getCurrentIndex() + 1);
         });
 
         const updateScrollButtons = () => {
-            // Left button (start)
             if (servicesGrid.scrollLeft <= 5) {
                 prevBtn.style.display = 'none';
             } else {
                 prevBtn.style.display = 'flex';
             }
 
-            // Right button (end)
             if (Math.ceil(servicesGrid.scrollLeft + servicesGrid.clientWidth) >= servicesGrid.scrollWidth - 5) {
                 nextBtn.style.display = 'none';
             } else {
@@ -621,7 +620,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         servicesGrid.addEventListener('scroll', updateScrollButtons);
         window.addEventListener('resize', updateScrollButtons);
-        // Initial check
         updateScrollButtons();
     }
 
@@ -639,10 +637,18 @@ document.addEventListener('DOMContentLoaded', () => {
                     labels: ['2023-24', '2024-25', '2025-26'],
                     datasets: [{
                         label: 'Operational Excellence Score',
-                        data: [0, 0, 0], // Initial empty data, to be filled by fetch
-                        backgroundColor: '#0E5E72',
-                        borderColor: '#0E5E72',
-                        borderWidth: 1
+                        data: [0, 0, 0],
+                        backgroundColor: (context) => {
+                            const chart = context.chart;
+                            const { ctx, chartArea } = chart;
+                            if (!chartArea) return null;
+                            const gradient = ctx.createLinearGradient(0, chartArea.bottom, 0, chartArea.top);
+                            gradient.addColorStop(0, '#0E5E72');
+                            gradient.addColorStop(1, '#16a3b6');
+                            return gradient;
+                        },
+                        borderRadius: 12,
+                        borderSkipped: false,
                     }]
                 },
                 options: {
@@ -712,13 +718,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     datasets: [{
                         data: [0, 0, 0], // Initial empty data
                         backgroundColor: [
-                            '#7f8c8d', // 2023
-                            '#16a085', // 2024
-                            '#2ecc71'  // 2025
+                            '#94a3b8', // 2023 - slate
+                            '#0ea5e9', // 2024 - sky
+                            '#10b981'  // 2025 - emerald
                         ],
-                        borderWidth: 2,
-                        borderColor: '#ffffff',
-                        hoverOffset: 12
+                        borderWidth: 0,
+                        hoverOffset: 20
                     }]
                 },
                 options: {
@@ -903,25 +908,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // Initialize Dashboard Features with IntersectionObserver for performance
-    const dashboardSection = document.getElementById('dashboard');
-    if (dashboardSection) {
-        initCharts();
-        initCounters();
-
-        const dashboardObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    fetchDashboardData();
-                    dashboardObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.1 });
-
-        dashboardObserver.observe(dashboardSection);
-    }
-
+    // Initialize Dashboard Features
+    initCharts();
+    initCounters();
     initScrollAnimations();
+    fetchDashboardData();
 });
 
 // Global Back Function
@@ -932,5 +923,4 @@ function goBack() {
         window.location.href = 'index.html';
     }
 }
-
 
