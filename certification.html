@@ -67,27 +67,27 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 18px 25px;
+            padding: 16px 25px;
             color: #555;
             font-size: 0.85rem;
             font-weight: 600;
             text-decoration: none;
             text-transform: uppercase;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             background: white;
             border-left: 4px solid transparent;
         }
 
         .sidebar-nav a:hover {
-            background-color: #fcfcfc;
+            padding-left: 30px;
+            background-color: rgba(var(--primary-rgb), 0.03);
             color: var(--primary-color);
         }
 
         .sidebar-nav a.active {
-            background-color: #fff;
+            background-color: rgba(var(--primary-rgb), 0.05);
             color: var(--primary-color);
             border-left-color: var(--primary-color);
-            box-shadow: inset 5px 0 0 -5px var(--primary-color);
         }
 
         .sidebar-nav a i {
@@ -202,10 +202,13 @@
         .content-area {
             flex-grow: 1;
             background: white;
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            padding: 50px 60px;
+            border-radius: 12px;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
             min-height: 600px;
+            position: relative;
+            z-index: 2;
         }
 
         .content-section {
@@ -248,13 +251,26 @@
         }
 
         blockquote {
-            background: #f8f9fa;
-            border-left: 5px solid var(--accent-color);
-            margin: 30px 0;
-            padding: 20px;
+            position: relative;
+            border: none;
+            background: #f8fafc;
+            margin: 40px 0;
+            padding: 30px 40px;
+            border-radius: 12px;
             font-style: italic;
-            color: #555;
+            color: #334155;
             text-align: justify;
+            box-shadow: inset 4px 0 0 0 var(--accent-color);
+        }
+
+        blockquote::before {
+            content: '"';
+            position: absolute;
+            top: -10px;
+            left: 10px;
+            font-size: 5rem;
+            color: rgba(var(--accent-rgb), 0.1);
+            font-family: serif;
         }
 
         @keyframes fadeIn {
@@ -436,7 +452,6 @@
 
 <body>
     <!-- Header / Navbar -->
-    <!-- Header / Navbar -->
     <header>
         <!-- Top Header with Logo -->
         <div class="top-header">
@@ -452,6 +467,12 @@
             </div>
         </div>
     </header>
+
+    <div class="hero-bg-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
 
     <!-- Main Navigation Bar -->
     <div class="main-nav">
@@ -470,6 +491,7 @@
                     </li>
                     <li><a href="index.html#services" data-translate="nav_services">Services</a></li>
                     <li><a href="index.html#dashboard" data-translate="nav_dashboard">Dashboard</a></li>
+                    <li><a href="career.html" data-translate="nav_career">Career</a></li>
                     <li><a href="index.html#contact" data-translate="nav_contact">Contact</a></li>
                 </ul>
             </nav>
@@ -510,29 +532,47 @@
             </div>
             <ul class="sidebar-nav" id="sidebarNav">
                 <li><a href="#brief-history" class="active" onclick="showSection('brief-history')"
-                        data-translate="sidebar_history">BRIEF HISTORY <i class="fas fa-chevron-right"></i></a></li>
+                        data-translate="sidebar_history"><span><i class="fas fa-history"
+                                style="width: 20px; margin-right: 12px;"></i> BRIEF HISTORY</span> <i
+                            class="fas fa-chevron-right"></i></a></li>
                 <li><a href="#introduction" onclick="showSection('introduction')"
-                        data-translate="sidebar_intro">INTRODUCTION <i class="fas fa-chevron-right"></i></a></li>
-                <li><a href="#objective" onclick="showSection('objective')" data-translate="sidebar_objective">OBJECTIVE
+                        data-translate="sidebar_intro"><span><i class="fas fa-info-circle"
+                                style="width: 20px; margin-right: 12px;"></i> INTRODUCTION</span> <i
+                            class="fas fa-chevron-right"></i></a></li>
+                <li><a href="#objective" onclick="showSection('objective')" data-translate="sidebar_objective"><span><i
+                                class="fas fa-bullseye" style="width: 20px; margin-right: 12px;"></i> OBJECTIVE</span>
                         <i class="fas fa-chevron-right"></i></a></li>
                 <li><a href="#components" onclick="showSection('components')"
-                        data-translate="sidebar_components">COMPONENTS <i class="fas fa-chevron-right"></i></a></li>
-                <li><a href="#levels" onclick="showSection('levels')" data-translate="sidebar_levels">ZED CERTIFICATION
-                        LEVELS <i class="fas fa-chevron-right"></i></a></li>
+                        data-translate="sidebar_components"><span><i class="fas fa-th-list"
+                                style="width: 20px; margin-right: 12px;"></i> COMPONENTS</span> <i
+                            class="fas fa-chevron-right"></i></a></li>
+                <li><a href="#levels" onclick="showSection('levels')" data-translate="sidebar_levels"><span><i
+                                class="fas fa-layer-group" style="width: 20px; margin-right: 12px;"></i> ZED
+                            LEVELS</span>
+                        <i class="fas fa-chevron-right"></i></a></li>
                 <li><a href="#eligibility" onclick="showSection('eligibility')"
-                        data-translate="sidebar_eligibility">ELIGIBILITY <i class="fas fa-chevron-right"></i></a></li>
-                <li><a href="#subsidy" onclick="showSection('subsidy')" data-translate="sidebar_subsidy">SUBSIDY ON COST
-                        OF CERTIFICATION <i class="fas fa-chevron-right"></i></a></li>
-                <li><a href="#process" onclick="showSection('process')" data-translate="sidebar_process">CERTIFICATION
-                        PROCESS <i class="fas fa-chevron-right"></i></a></li>
+                        data-translate="sidebar_eligibility"><span><i class="fas fa-user-check"
+                                style="width: 20px; margin-right: 12px;"></i> ELIGIBILITY</span> <i
+                            class="fas fa-chevron-right"></i></a></li>
+                <li><a href="#subsidy" onclick="showSection('subsidy')" data-translate="sidebar_subsidy"><span><i
+                                class="fas fa-hand-holding-usd" style="width: 20px; margin-right: 12px;"></i>
+                            SUBSIDY</span> <i class="fas fa-chevron-right"></i></a></li>
+                <li><a href="#process" onclick="showSection('process')" data-translate="sidebar_process"><span><i
+                                class="fas fa-sync" style="width: 20px; margin-right: 12px;"></i> PROCESS</span>
+                        <i class="fas fa-chevron-right"></i></a></li>
                 <li><a href="#gap-analysis" onclick="showSection('gap-analysis')"
-                        data-translate="sidebar_gap_analysis">GAP ANALYSIS & HANDHOLDING <i
+                        data-translate="sidebar_gap_analysis"><span><i class="fas fa-search-plus"
+                                style="width: 20px; margin-right: 12px;"></i> GAP ANALYSIS</span> <i
                             class="fas fa-chevron-right"></i></a></li>
                 <li><a href="#surveillance" onclick="showSection('surveillance')"
-                        data-translate="sidebar_surveillance">SURVEILLANCE <i class="fas fa-chevron-right"></i></a></li>
-                <li><a href="#renewal" onclick="showSection('renewal')" data-translate="sidebar_renewal">RENEWAL AFTER
-                        EXPIRY OF ZED CERTIFICATE <i class="fas fa-chevron-right"></i></a></li>
-                <li><a href="#documents" onclick="showSection('documents')" data-translate="sidebar_documents">DOCUMENTS
+                        data-translate="sidebar_surveillance"><span><i class="fas fa-eye"
+                                style="width: 20px; margin-right: 12px;"></i> SURVEILLANCE</span> <i
+                            class="fas fa-chevron-right"></i></a></li>
+                <li><a href="#renewal" onclick="showSection('renewal')" data-translate="sidebar_renewal"><span><i
+                                class="fas fa-redo" style="width: 20px; margin-right: 12px;"></i> RENEWAL</span> <i
+                            class="fas fa-chevron-right"></i></a></li>
+                <li><a href="#documents" onclick="showSection('documents')" data-translate="sidebar_documents"><span><i
+                                class="fas fa-file-alt" style="width: 20px; margin-right: 12px;"></i> DOCUMENTS</span>
                         <i class="fas fa-chevron-right"></i></a></li>
             </ul>
         </aside>
@@ -1111,6 +1151,15 @@
                 <img src="assets/navabharatha_logo.png" alt="Navabharatha Logo">
                 <p class="footer-tagline" data-translate="footer_tagline">Vision to Increase Efficiency</p>
             </div>
+            <div class="footer-column">
+                <h2 class="footer-heading" data-translate="footer_about_title">About Us</h2>
+                <div class="footer-links">
+                    <p class="footer-about-text" data-translate="footer_about_text">
+                        NAVABHARATHA is a sustainable organization focused on consistency and growth, delivering
+                        reliable solutions and long-term value.
+                    </p>
+                </div>
+            </div>
             <div class="footer-column" style="flex: 0 0 200px;">
                 <h4 class="footer-heading" data-translate="footer_links_title">Quick Links</h4>
                 <div class="footer-links">
@@ -1119,6 +1168,7 @@
 
                         <li><a href="index.html#services" data-translate="nav_services">Services</a></li>
                         <li><a href="index.html#dashboard" data-translate="nav_dashboard">Dashboard</a></li>
+                        <li><a href="career.html" data-translate="nav_career">Career</a></li>
                         <li><a href="index.html#contact" data-translate="nav_contact">Contact</a></li>
                     </ul>
                 </div>
@@ -1130,10 +1180,13 @@
                     <ul>
                         <li><a href="terms.html" data-translate="footer_terms">Terms and Conditions</a></li>
                         <li><a href="privacy.html" data-translate="footer_privacy">Privacy Policy</a></li>
+                        <li><a href="career.html" data-translate="career_link">Career</a></li>
                     </ul>
                 </div>
             </div>
-            <div class="footer-column">
+        </div>
+        <div class="footer-bottom">
+            <div class="container footer-social-container">
                 <h4 class="footer-heading" data-translate="footer_social_title">Follow Us</h4>
                 <div class="social-icons">
                     <a href="https://www.facebook.com/share/1SLmz1mbFB/" class="social-icon" target="_blank"

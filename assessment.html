@@ -55,19 +55,27 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 20px;
+            padding: 16px 25px;
+            color: #555;
+            font-size: 0.85rem;
+            font-weight: 600;
             text-decoration: none;
-            color: var(--text-color);
-            font-weight: 500;
-            font-size: 0.95rem;
-            transition: background-color 0.3s, color 0.3s;
+            text-transform: uppercase;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: white;
+            border-left: 4px solid transparent;
         }
 
-        .sidebar-nav a:hover,
-        .sidebar-nav a.active {
-            background-color: #f8fafc;
+        .sidebar-nav a:hover {
+            padding-left: 30px;
+            background-color: rgba(var(--primary-rgb), 0.03);
             color: var(--primary-color);
-            border-left: 4px solid var(--primary-color);
+        }
+
+        .sidebar-nav a.active {
+            background-color: rgba(var(--primary-rgb), 0.05);
+            color: var(--primary-color);
+            border-left-color: var(--primary-color);
         }
 
         .sidebar-nav a i {
@@ -82,10 +90,12 @@
         /* Content Area styles handled by global or similar classes, simplified here to match consulting structure */
         .content-area {
             background: white;
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-            /* min-height handled by content */
+            padding: 50px 60px;
+            border-radius: 12px;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 2;
         }
 
         .content-area h2 {
@@ -114,14 +124,26 @@
         }
 
         .content-area blockquote {
-            border-left: 4px solid var(--primary-color);
-            padding-left: 20px;
-            margin: 30px 0;
+            position: relative;
+            border: none;
+            background: #f8fafc;
+            margin: 40px 0;
+            padding: 30px 40px;
+            border-radius: 12px;
             font-style: italic;
-            color: #555;
-            background-color: #f9f9f9;
-            padding: 20px;
-            border-radius: 0 8px 8px 0;
+            color: #334155;
+            text-align: justify;
+            box-shadow: inset 4px 0 0 0 var(--accent-color);
+        }
+
+        .content-area blockquote::before {
+            content: '"';
+            position: absolute;
+            top: -10px;
+            left: 10px;
+            font-size: 5rem;
+            color: rgba(var(--accent-rgb), 0.1);
+            font-family: serif;
         }
 
         /* Documents in Sidebar */
@@ -271,6 +293,12 @@
         </div>
     </header>
 
+    <div class="hero-bg-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
     <!-- Main Navigation Bar -->
     <div class="main-nav">
         <div class="container main-nav-container">
@@ -288,6 +316,7 @@
                     </li>
                     <li><a href="index.html#services" data-translate="nav_services">Services</a></li>
                     <li><a href="index.html#dashboard" data-translate="nav_dashboard">Dashboard</a></li>
+                    <li><a href="career.html" data-translate="nav_career">Career</a></li>
                     <li><a href="index.html#contact" data-translate="nav_contact">Contact</a></li>
                 </ul>
             </nav>
@@ -319,11 +348,14 @@
     </div>
 
     <!-- Page Content -->
-    <section class="page-header" style="background-color: #f4f4f4; padding: 60px 0; text-align: center;">
+    <section class="page-header"
+        style="background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); padding: 40px 0; text-align: center; position: relative; z-index: 2; border-bottom: 1px solid rgba(0,0,0,0.05);">
         <div class="container">
-            <h2 data-translate="assessment_title" class="page-header-title">ZED Assessment</h2>
-            <p data-translate="assessment_subtitle">Comprehensive Evaluation for Certification Readiness</p>
-
+            <h2 data-translate="assessment_title" class="page-header-title"
+                style="font-size: 3rem; margin-bottom: 15px;">ZED Assessment</h2>
+            <p data-translate="assessment_subtitle"
+                style="font-size: 1.2rem; color: #64748b; max-width: 700px; margin: 0 auto;">Comprehensive Evaluation
+                for Certification Readiness</p>
         </div>
     </section>
 
@@ -336,12 +368,16 @@
             </div>
             <ul class="sidebar-nav" id="sidebarNav">
                 <li><a href="#overview" onclick="showSection('overview')" class="active"
-                        data-translate="sidebar_overview">OVERVIEW <i class="fas fa-chevron-right"></i></a></li>
+                        data-translate="sidebar_overview"><span><i class="fas fa-info-circle"
+                                style="width: 20px; margin-right: 12px;"></i> OVERVIEW</span> <i
+                            class="fas fa-chevron-right"></i></a></li>
                 <li><a href="#process" onclick="showSection('process')"
-                        data-translate="sidebar_assessment_process">ASSESSMENT PROCESS <i
+                        data-translate="sidebar_assessment_process"><span><i class="fas fa-sync"
+                                style="width: 20px; margin-right: 12px;"></i> ASSESSMENT PROCESS</span> <i
                             class="fas fa-chevron-right"></i></a>
                 </li>
-                <li><a href="#benefits" onclick="showSection('benefits')" data-translate="sidebar_benefits">BENEFITS <i
+                <li><a href="#benefits" onclick="showSection('benefits')" data-translate="sidebar_benefits"><span><i
+                                class="fas fa-award" style="width: 20px; margin-right: 12px;"></i> BENEFITS</span> <i
                             class="fas fa-chevron-right"></i></a></li>
             </ul>
         </aside>
@@ -399,6 +435,15 @@
                 <img src="assets/navabharatha_logo.png" alt="Navabharatha Logo">
                 <p class="footer-tagline" data-translate="footer_tagline">Vision to Increase Efficiency</p>
             </div>
+            <div class="footer-column">
+                <h2 class="footer-heading" data-translate="footer_about_title">About Us</h2>
+                <div class="footer-links">
+                    <p class="footer-about-text" data-translate="footer_about_text">
+                        NAVABHARATHA is a sustainable organization focused on consistency and growth, delivering
+                        reliable solutions and long-term value.
+                    </p>
+                </div>
+            </div>
             <div class="footer-column" style="flex: 0 0 200px;">
                 <h2 class="footer-heading" data-translate="footer_links_title">Quick Links</h2>
                 <div class="footer-links">
@@ -407,6 +452,7 @@
 
                         <li><a href="index.html#services" data-translate="nav_services">Services</a></li>
                         <li><a href="index.html#dashboard" data-translate="nav_dashboard">Dashboard</a></li>
+                        <li><a href="career.html" data-translate="nav_career">Career</a></li>
                         <li><a href="index.html#contact" data-translate="nav_contact">Contact</a></li>
                     </ul>
                 </div>
@@ -418,10 +464,13 @@
                     <ul>
                         <li><a href="terms.html" data-translate="footer_terms">Terms and Conditions</a></li>
                         <li><a href="privacy.html" data-translate="footer_privacy">Privacy Policy</a></li>
+                        <li><a href="career.html" data-translate="career_link">Career</a></li>
                     </ul>
                 </div>
             </div>
-            <div class="footer-column">
+        </div>
+        <div class="footer-bottom">
+            <div class="footer-social-container">
                 <h2 class="footer-heading" data-translate="footer_social_title">Follow Us</h2>
                 <div class="social-icons">
                     <a href="https://www.facebook.com/share/1SLmz1mbFB/" class="social-icon" target="_blank"

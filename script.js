@@ -114,7 +114,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Form submission handler
     const form = document.querySelector('#contactForm');
+
+    // Warm-up ping to wake up the Render backend when user starts interacting with the form
+    const API_URL = 'https://zed-backend-yt1l.onrender.com/send-email';
+    let isWarmedUp = false;
+    const warmupServer = () => {
+        if (!isWarmedUp) {
+            console.log('Sending warm-up ping to server...');
+            fetch(API_URL, { method: 'OPTIONS' }).catch(() => { }); // Minimal OPTIONS request
+            isWarmedUp = true;
+        }
+    };
+
     if (form) {
+        // Trigger warm-up on any input focus
+        form.querySelectorAll('input, textarea, select').forEach(input => {
+            input.addEventListener('focus', warmupServer, { once: true });
+        });
+
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
 
@@ -149,10 +166,7 @@ document.addEventListener('DOMContentLoaded', () => {
             submitBtn.disabled = true;
             submitBtn.textContent = 'Sending...';
 
-            // API URL
-            const API_URL = 'https://zed-backend-yt1l.onrender.com/send-email';
-            // To test locally, uncomment the line below and ensure your local server is running
-            // const API_URL = 'http://localhost:3000/send-email';
+            // API is already defined at form level
 
             try {
                 console.log('Sending email to:', API_URL);
@@ -179,7 +193,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (response.ok) {
                     // Success!
                     console.log('Email sent successfully!');
-                    showNotification(' Your message has been sent successfully. We will be in touch soon!', 'success');
+                    showNotification(' Thank you! We will reach out to you soon.', 'success');
                     form.reset();
                 } else {
                     // Server returned an error
