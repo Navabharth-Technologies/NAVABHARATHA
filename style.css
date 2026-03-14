@@ -788,12 +788,6 @@ header {
     letter-spacing: -2px;
 }
 
-.hero-content h2.hero-title .accent-text {
-    background: linear-gradient(135deg, var(--accent-color), #f7cc4b);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
 
 .hero-content p {
     font-size: 1.25rem;
