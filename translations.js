@@ -11,7 +11,6 @@ const translations = {
         hero_description_1: "Our organization offers a wide range of professional services, including certification assistance, documentation, audits, consulting, and technical assessments. With a focus on sustainability and innovation, we help institutions, businesses, and government bodies improve their operational standards, achieve regulatory compliance, and successfully complete critical development projects.",
         hero_cta: "Get Started",
         about_title: "About Us",
-        about_title: "About Us",
         founder_name: "DINESH J K",
         founder_title: "FOUNDER & CEO",
         about_description: "Navabharatha Sustainable Organization for Consistently is a multidisciplinary consultancy dedicated to delivering high-quality government project support, certification services, and sustainability-driven solutions. We specialize in planning, executing, and managing government initiatives across various sectors, ensuring compliance, efficiency, and long-term impact. By combining expertise, transparency, and consistent performance, Navabharatha Sustainable Organization for Consistently aims to contribute to national progress and build a better, and more efficient future.",
@@ -391,7 +390,10 @@ const translations = {
         learn_more: "Learn More",
         visit_site: "Visit Site",
         coming_soon: "Coming Soon",
-        search_placeholder: "Search..."
+        search_placeholder: "Search...",
+        modal_success_title: "Thank You!",
+        modal_success_message: "Your message has been sent successfully. We will get back to you soon.",
+        modal_close: "Close"
     },
     // Kannada
     kn: {

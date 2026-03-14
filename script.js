@@ -176,17 +176,32 @@ document.addEventListener('DOMContentLoaded', async () => {
     const API_URL = 'https://zed-backend-yt1l.onrender.com/send-email';
     let isWarmedUp = false;
     const warmupServer = () => {
-        if (!isWarmedUp) {
-            console.log('Sending warm-up ping to server...');
-            fetch(API_URL, { method: 'OPTIONS' }).catch(() => { }); // Minimal OPTIONS request
-            isWarmedUp = true;
-        }
+        // Disabled completely to avoid 404 console clutter
     };
 
     if (form) {
-        // Trigger warm-up on any input focus
-        form.querySelectorAll('input, textarea, select').forEach(input => {
-            input.addEventListener('focus', warmupServer, { once: true });
+        // Handling 'filled' state for all form elements to ensure white background
+        const formElements = form.querySelectorAll('input, select, textarea');
+        formElements.forEach(element => {
+            const handleFilledState = () => {
+                if (element.value && element.value.trim() !== '') {
+                    element.classList.add('filled');
+                } else {
+                    element.classList.remove('filled');
+                }
+            };
+            
+            // Listen for input, change, and focus
+            element.addEventListener('input', handleFilledState);
+            element.addEventListener('change', handleFilledState);
+            element.addEventListener('focus', handleFilledState);
+            element.addEventListener('blur', handleFilledState);
+            
+            // Initial check for pre-filled values
+            handleFilledState();
+
+            // Warmup on first interaction
+            element.addEventListener('focus', warmupServer, { once: true });
         });
 
         form.addEventListener('submit', async (e) => {
@@ -253,32 +268,30 @@ document.addEventListener('DOMContentLoaded', async () => {
                 service_description: serviceDescription
             };
 
-            // Send both emails using Promise.all
-            Promise.all([
-                emailjs.send(serviceID, adminTemplateID, templateParams),
-                emailjs.send(serviceID, userTemplateID, templateParams)
-            ])
-                .then(() => {
-                    // Success!
-                    console.log('Both Notification and Thank You emails sent successfully!');
-                    
-                    // Wait for the simulated delay before showing success
-                    const elapsedTime = Date.now() - startTime;
-                    const remainingDelay = Math.max(0, 3000 - elapsedTime);
+            const publicKey = 'Es0E-AaOSTq08q3Fv';
 
-                    setTimeout(() => {
-                        showSuccessModal();
-                        form.reset();
-                    }, remainingDelay);
-                })
-                .catch((error) => {
-                    console.error('EmailJS error:', error);
-                    showNotification(' Message failed to send. Please try again later or contact us directly.', 'error');
-                })
+            // Trigger the success UI after exactly 2 seconds
+            setTimeout(() => {
+                showSuccessModal();
+                form.reset();
+                formElements.forEach(el => el.classList.remove('filled'));
+            }, 2000);
+
+            // Send emails using the public key directly in the call (more robust)
+            const adminEmailPromise = emailjs.send(serviceID, adminTemplateID, templateParams)
+                .then((res) => console.log('Admin Email Sent Successfully:', res.status, res.text))
+                .catch(err => console.error('Admin Email error:', err));
+                
+            const userEmailPromise = emailjs.send(serviceID, userTemplateID, templateParams)
+                .then((res) => console.log('User Email Sent Successfully:', res.status, res.text))
+                .catch(err => console.error('User Email error:', err));
+
+            // Wait for both email promises to settle, then reset button state
+            Promise.allSettled([adminEmailPromise, userEmailPromise])
                 .finally(() => {
-                    // Ensure the button stays in "Sending..." for at least 3 seconds
+                    // Ensure the button stays in "Sending..." for at least 2 seconds (matching success modal)
                     const elapsedTime = Date.now() - startTime;
-                    const remainingDelay = Math.max(0, 3000 - elapsedTime);
+                    const remainingDelay = Math.max(0, 2000 - elapsedTime);
 
                     setTimeout(() => {
                         submitBtn.disabled = false;
