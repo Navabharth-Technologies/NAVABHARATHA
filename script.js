@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
 
         // Adjust header UI based on current page
-        const isHomePage = window.location.pathname.endsWith('index.html') || window.location.pathname === '/' || window.location.pathname.endsWith('ZED/') || window.location.pathname.endsWith('ZED\\');
+        const isHomePage = window.location.pathname.endsWith('index.html') || window.location.pathname.endsWith('index_live.html') || window.location.pathname === '/' || window.location.pathname.endsWith('ZED/') || window.location.pathname.endsWith('ZED\\');
         const mainNav = document.getElementById('mainNavElement');
         const headerBackBtn = document.getElementById('headerBackBtn');
         
