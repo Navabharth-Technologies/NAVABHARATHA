@@ -33,15 +33,28 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
 
         // Adjust header UI based on current page
-        const isHomePage = window.location.pathname.endsWith('index.html') || window.location.pathname.endsWith('index_live.html') || window.location.pathname === '/' || window.location.pathname.endsWith('ZED/') || window.location.pathname.endsWith('ZED\\');
+        // Improved Home Page Detection
+        const path = window.location.pathname.toLowerCase();
+        const isHomePage = path.endsWith('index.html') || 
+                           path.endsWith('index_live.html') || 
+                           path === '/' || 
+                           path.endsWith('/') || 
+                           path.includes('/index.html') ||
+                           path.includes('/index_live.html') ||
+                           path.endsWith('zed') || 
+                           path.endsWith('zed/') || 
+                           path.endsWith('zed\\');
+
         const mainNav = document.getElementById('mainNavElement');
         const headerBackBtn = document.getElementById('headerBackBtn');
         
         if (mainNav) {
             if (isHomePage) {
+                // On Home Page: Add home-nav class (which triggers CSS to hide back button)
                 mainNav.classList.add('home-nav');
                 if (headerBackBtn) headerBackBtn.style.display = 'none';
             } else {
+                // On Other Pages: Remove home-nav class to show back button
                 mainNav.classList.remove('home-nav');
                 if (headerBackBtn) headerBackBtn.style.display = 'block';
                 // For sub-pages, adjust the back button behavior

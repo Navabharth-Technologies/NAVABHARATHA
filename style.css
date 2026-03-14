@@ -369,6 +369,12 @@ header {
     gap: 20px;
 }
 
+/* Ensure back button is hidden on home page */
+.home-nav .back-btn,
+.home-nav .nav-left-group {
+    display: none !important;
+}
+
 .home-nav .nav-right {
     margin-left: auto;
 }
