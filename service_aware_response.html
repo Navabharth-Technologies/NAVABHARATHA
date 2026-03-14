@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inquiry Received - Navabharatha</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f9;
+            color: #2d3748;
+        }
+        .email-wrapper {
+            width: 100%;
+            padding: 40px 0;
+        }
+        .email-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        .brand-strip {
+            height: 6px;
+            background: linear-gradient(90deg, #0E5E72 0%, #E5B028 100%);
+        }
+        .email-body {
+            padding: 40px;
+        }
+        .logo-section {
+            margin-bottom: 30px;
+        }
+        .logo-section img {
+            height: 50px;
+        }
+        h1 {
+            font-size: 24px;
+            color: #0E5E72;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 16px;
+            line-height: 1.7;
+            color: #4a5568;
+            margin-bottom: 20px;
+        }
+        .highlight-box {
+            background-color: #f8fafc;
+            border-left: 4px solid #0E5E72;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .highlight-box.service-detail {
+            border-left-color: #E5B028;
+            background-color: #fffaf0;
+        }
+        .highlight-box p {
+            margin: 0;
+            font-size: 15px;
+        }
+        .signature {
+            border-top: 1px solid #edf2f7;
+            padding-top: 20px;
+            margin-top: 40px;
+        }
+        .signature-name {
+            font-weight: bold;
+            color: #0E5E72;
+            display: block;
+        }
+        .signature-title {
+            font-size: 14px;
+            color: #718096;
+        }
+        .footer {
+            background-color: #105469;
+            padding: 20px 40px;
+            text-align: center;
+            font-size: 13px;
+            color: #ffffff;
+        }
+        .social-links a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #0E5E72;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-wrapper">
+        <div class="email-container">
+            <div class="brand-strip"></div>
+            <div class="email-body">
+                <div class="logo-section">
+                    <img src="https://navabharatha.com/assets/navabharatha_logo.png" alt="Navabharatha">
+                </div>
+                <h1>Dear {{name}},</h1>
+                <p>Thank you for reaching out to <strong>Navabharatha Sustainable Organization</strong> regarding our <strong>{{service}}</strong> services. We have received your inquiry and appreciate your interest in our organization.</p>
+                
+                <div class="highlight-box service-detail">
+                    <p><strong>About {{service}}:</strong> {{service_description}}</p>
+                </div>
+
+                <div class="highlight-box">
+                    <p>Our team of consultants is currently reviewing your details. You can expect a detailed response from us within 24 to 48 business hours.</p>
+                </div>
+
+                <p>In the meantime, feel free to explore our recent projects and live consistency updates on our official dashboard.</p>
+                
+                <div class="signature">
+                    <span class="signature-name">Client Success Team</span>
+                    <span class="signature-title">Navabharatha Sustainable Organization</span>
+                </div>
+            </div>
+            <div class="footer">
+                <p>&copy; 2026 Navabharatha Sustainable Organization. Mysore, Karnataka.</p>
+                <div class="social-links">
+                    <a href="https://navabharatha.com">Website</a> |
+                    <a href="https://www.linkedin.com/company/navabharatha">LinkedIn</a> |
+                    <a href="https://www.instagram.com/navabharatha">Instagram</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -16,23 +16,80 @@ const langCodes = {
 
 
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+    console.log('Navabharath Technologies website loading components...');
+
+    try {
+        const headerPlaceholder = document.getElementById('header-placeholder');
+        if (headerPlaceholder) {
+            const headerHtml = await fetch('header.html').then(res => res.text());
+            headerPlaceholder.outerHTML = headerHtml;
+        }
+
+        const footerPlaceholder = document.getElementById('footer-placeholder');
+        if (footerPlaceholder) {
+            const footerHtml = await fetch('footer.html').then(res => res.text());
+            footerPlaceholder.outerHTML = footerHtml;
+        }
+
+        // Adjust header UI based on current page
+        const isHomePage = window.location.pathname.endsWith('index.html') || window.location.pathname === '/' || window.location.pathname.endsWith('ZED/') || window.location.pathname.endsWith('ZED\\');
+        const mainNav = document.getElementById('mainNavElement');
+        const headerBackBtn = document.getElementById('headerBackBtn');
+        
+        if (mainNav) {
+            if (isHomePage) {
+                mainNav.classList.add('home-nav');
+                if (headerBackBtn) headerBackBtn.style.display = 'none';
+            } else {
+                mainNav.classList.remove('home-nav');
+                if (headerBackBtn) headerBackBtn.style.display = 'block';
+                // For sub-pages, adjust the back button behavior
+                if (headerBackBtn) {
+                    headerBackBtn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        if (window.history.length > 1 && !document.referrer.includes('navabharatha.com') && document.referrer !== '') {
+                             window.history.back();
+                        } else {
+                             window.location.href = 'index.html';
+                        }
+                    });
+                }
+            }
+        }
+    } catch (error) {
+        console.error('Error loading components:', error);
+    }
+
     console.log('Navabharath Technologies website loaded');
-
-
-
-
 
     // Custom Notification Function
     function showNotification(message, type = 'success') {
         const notification = document.getElementById('customNotification');
-        notification.textContent = message;
-        notification.className = `custom-notification ${type} show`;
+        if (notification) {
+            notification.textContent = message;
+            notification.className = `custom-notification ${type} show`;
 
-        // Auto-hide after 5 seconds
-        setTimeout(() => {
-            notification.classList.remove('show');
-        }, 5000);
+            // Auto-hide after 5 seconds
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 5000);
+        }
+    }
+
+    // Modal Functions
+    window.closeModal = function () {
+        const modal = document.getElementById('successModal');
+        if (modal) {
+            modal.classList.remove('active');
+        }
+    };
+
+    function showSuccessModal() {
+        const modal = document.getElementById('successModal');
+        if (modal) {
+            modal.classList.add('active');
+        }
     }
 
     // Language Dropdown Functionality
@@ -165,50 +222,70 @@ document.addEventListener('DOMContentLoaded', () => {
             const originalBtnText = submitBtn.textContent;
             submitBtn.disabled = true;
             submitBtn.textContent = 'Sending...';
+            const startTime = Date.now();
+            // Service Details Mapping for Personalized Email
+            const serviceDetails = {
+                'Zed Certification': 'ZED Certification (Zero Defect Zero Effect) is a Government of India initiative that helps MSMEs improve product quality and reduce environmental impact through high-quality manufacturing practices.',
+                'ISO': 'ISO Certification is an internationally recognized standard that confirms your organization follows standardized processes for quality, safety, efficiency, and customer trust.',
+                'ISI': 'ISI Certification by the Bureau of Indian Standards (BIS) ensures your products meet Indian safety, quality, and performance standards, making them reliable for consumers.',
+                'Zed Assessment': 'ZED Assessment is a rigorous evaluation of your systems and processes to check compliance with ZED Standards and identify areas for operational improvement.',
+                'Zed Consulting': 'ZED Consulting provides expert guidance through process improvements, documentation, and compliance requirements to help you achieve ZED Certification efficiently.',
+                'FSSAI': 'FSSAI Certification ensures your food business complies with Indian safety, hygiene, and quality regulations, making your products safe for consumption.',
+                'Business Consulting': 'Business Consulting offers strategic guidance on operations, compliance, and growth to help your organization solve challenges and improve performance.',
+                'Software Solutions': 'Software Solutions are customized digital systems designed to automate your workflows, manage data effectively, and improve overall business efficiency.'
+            };
 
-            // API is already defined at form level
+            const selectedService = form.querySelector('#service').value;
+            const serviceDescription = serviceDetails[selectedService] || 'We provide professional consultancy and certification services to help your business achieve consistency and excellence.';
 
-            try {
-                console.log('Sending email to:', API_URL);
+            // EmailJS Configuration
+            const serviceID = 'service_l1k4lgj';
+            const adminTemplateID = 'template_6qixgrh';   // To receive queries
+            const userTemplateID = 'template_232ygdm';    // To send personalized thank-you
 
-                const response = await fetch(API_URL, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ name, email, phone, service, message })
-                });
+            // Prepare Template Parameters
+            const templateParams = {
+                name: form.querySelector('#name').value,
+                email: form.querySelector('#email').value,
+                phone: form.querySelector('#phone').value,
+                service: selectedService,
+                message: form.querySelector('#message').value,
+                service_description: serviceDescription
+            };
 
-                console.log('Response received:', response.status, response.ok);
-
-                let data;
-                try {
-                    data = await response.json();
-                    console.log('Response data:', data);
-                } catch (jsonError) {
-                    console.error('JSON parse error:', jsonError);
-                    throw new Error('Invalid server response');
-                }
-
-                if (response.ok) {
+            // Send both emails using Promise.all
+            Promise.all([
+                emailjs.send(serviceID, adminTemplateID, templateParams),
+                emailjs.send(serviceID, userTemplateID, templateParams)
+            ])
+                .then(() => {
                     // Success!
-                    console.log('Email sent successfully!');
-                    showNotification(' Thank you! We will reach out to you soon.', 'success');
-                    form.reset();
-                } else {
-                    // Server returned an error
-                    console.error('Server error:', data);
-                    throw new Error(data.message || 'Server error occurred');
-                }
-            } catch (error) {
-                console.error('Fetch error:', error);
-                showNotification(' Message failed to send. Please try again later or contact us directly.', 'error');
-            } finally {
-                // Always restore button state
-                submitBtn.disabled = false;
-                submitBtn.textContent = originalBtnText;
-                console.log('Form submission complete');
-            }
+                    console.log('Both Notification and Thank You emails sent successfully!');
+                    
+                    // Wait for the simulated delay before showing success
+                    const elapsedTime = Date.now() - startTime;
+                    const remainingDelay = Math.max(0, 3000 - elapsedTime);
+
+                    setTimeout(() => {
+                        showSuccessModal();
+                        form.reset();
+                    }, remainingDelay);
+                })
+                .catch((error) => {
+                    console.error('EmailJS error:', error);
+                    showNotification(' Message failed to send. Please try again later or contact us directly.', 'error');
+                })
+                .finally(() => {
+                    // Ensure the button stays in "Sending..." for at least 3 seconds
+                    const elapsedTime = Date.now() - startTime;
+                    const remainingDelay = Math.max(0, 3000 - elapsedTime);
+
+                    setTimeout(() => {
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = originalBtnText;
+                        console.log('Form submission complete');
+                    }, remainingDelay);
+                });
         });
     }
 
@@ -661,7 +738,12 @@ document.addEventListener('DOMContentLoaded', () => {
                             gradient.addColorStop(1, '#16a3b6');
                             return gradient;
                         },
-                        borderRadius: 12,
+                        borderRadius: {
+                            topLeft: 12,
+                            topRight: 12,
+                            bottomLeft: 0,
+                            bottomRight: 0
+                        },
                         borderSkipped: false,
                     }]
                 },
@@ -927,6 +1009,27 @@ document.addEventListener('DOMContentLoaded', () => {
     initCounters();
     initScrollAnimations();
     fetchDashboardData();
+
+    // Infinite Seamless Marquee Duplication for Mobile
+    const initMobileMarquee = () => {
+        if (window.innerWidth <= 768) {
+            const marqueeContainers = document.querySelectorAll('.packages-grid, .modern-feature-grid');
+            marqueeContainers.forEach(container => {
+                // Only duplicate once
+                if (container.children.length > 0 && !container.getAttribute('data-duplicated')) {
+                    const children = Array.from(container.children);
+                    children.forEach(child => {
+                        const clone = child.cloneNode(true);
+                        container.appendChild(clone);
+                    });
+                    container.setAttribute('data-duplicated', 'true');
+                }
+            });
+        }
+    };
+
+    initMobileMarquee();
+    window.addEventListener('resize', initMobileMarquee);
 });
 
 // Global Back Function

@@ -42,6 +42,7 @@
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="home-modern.css">
     <link rel="stylesheet" href="notification.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -55,82 +56,8 @@
     <!-- Custom Notification -->
     <div id="customNotification" class="custom-notification"></div>
 
-    <!-- Header / Navbar -->
-    <header>
-        <!-- Top Header with Logo -->
-        <div class="top-header">
-            <div class="container top-header-container">
-                <a href="index.html" class="logo">
-                    <img src="assets/navabharatha_logo.png" alt="Navabharatha">
-                </a>
-                <div class="zed-branding">
-                    <h2 class="branding-title">NAVABHARATHA</h2>
-                    <p>SUSTAINABLE ORGANIZATION FOR CONSISTENCY</p>
-                    <small>REGSTD. 2023</small>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <!-- Main Navigation Bar -->
-    <div class="main-nav home-nav">
-        <div class="container main-nav-container">
-
-            <div class="nav-left-group">
-                <button class="back-btn" onclick="goBack()" style="display: none;" aria-label="Go Back">
-                    <i class="fas fa-arrow-left"></i>
-                </button>
-            </div>
-
-            <nav>
-                <ul class="nav-menu" id="navMenu">
-                    <li><a href="#home" data-translate="nav_home"><i class="fas fa-home mobile-home-icon"></i> Home</a>
-                    </li>
-                    <li><a href="#services" data-translate="nav_services">Services</a></li>
-                    <li><a href="#dashboard" data-translate="nav_dashboard">Dashboard</a></li>
-                    <li><a href="career.html" data-translate="nav_career">Career</a></li>
-                    <li><a href="#contact" data-translate="nav_contact">Contact</a></li>
-                    <!-- Language Selector (Mobile Only in Menu) -->
-
-                </ul>
-            </nav>
-
-            <div class="nav-right">
-                <!-- Language Selector -->
-                <div class="language-selector desktop-lang-selector">
-                    <button class="lang-btn" id="langBtn" aria-label="Select Language">
-                        <i class="fas fa-globe"></i>
-                        <span id="currentLang" class="current-lang-text">EN</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="language-dropdown" id="langDropdown">
-                        <div class="lang-option" data-lang="en">English</div>
-                        <div class="lang-option" data-lang="kn">ಕನ್ನಡ (Kannada)</div>
-                        <div class="lang-option" data-lang="hi">हिंदी (Hindi)</div>
-                        <div class="lang-option" data-lang="ta">தமிழ் (Tamil)</div>
-                        <div class="lang-option" data-lang="te">తెలుగు (Telugu)</div>
-                        <div class="lang-option" data-lang="mr">मराठी (Marathi)</div>
-                        <div class="lang-option" data-lang="ml">മലയാളം (Malayalam)</div>
-                    </div>
-                </div>
-
-                <div class="search-container">
-                    <input type="text" id="searchInput" class="search-input" placeholder="Search..."
-                        data-translate="search_placeholder">
-                    <button class="voice-search-btn" id="voiceSearchBtn" aria-label="Voice Search">
-                        <i class="fas fa-microphone"></i>
-                    </button>
-                    <button class="search-btn" id="searchBtn" aria-label="Search">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </div>
-
-                <button class="hamburger" id="hamburger" aria-label="Menu">
-                    <i class="fas fa-bars"></i>
-                </button>
-            </div>
-        </div>
-    </div>
+    
+    <div id="header-placeholder"></div>
 
     <!-- Hero Section -->
     <section id="home" class="hero">
@@ -141,7 +68,7 @@
         </div>
         <div class="container hero-container">
             <div class="hero-content">
-                <h2 data-translate="hero_title_1" class="hero-title">VISION TO INCREASE <span
+                <h2 data-translate="hero_title_1" class="hero-title">VISION TO INCREASE <br> <span
                         class="accent-text">EFFICIENCY</span></h2>
                 <p data-translate="hero_description_1">Our organization offers a wide range of professional services,
                     including certification assistance, documentation, audits, consulting, and technical assessments.
@@ -152,16 +79,32 @@
             </div>
             <div class="hero-image"
                 aria-label="Navabharatha Service Ecosystem showing Zed Certification, Consulting, Assessment, ISO, ISI, FSSAI, Business Consulting, and Software Solutions">
-                <img src="assets/final3_fixed_v3.png"
-                    alt="Navabharatha Sustainable Organization Services - ISI Certified">
+                
+                <div class="saas-ui-mockup">
+                    <div class="hero-floating-badge badge-1">
+                        <i class="fas fa-check-circle"></i>
+                        <span>ZED Gold Ready</span>
+                    </div>
+
+                    <div class="mockup-body">
+                        <img src="assets/final3_fixed_v3.png"
+                            alt="Navabharatha Sustainable Organization Services - ISI Certified">
+                    </div>
+                    
+                    <div class="hero-floating-badge badge-2">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Efficiency Boost +40%</span>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
 
-    <!-- Wave Divider -->
+    <!-- Section Divider Substituted with Dark Background Divider -->
     <div class="section-divider">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-            <path fill="#fdfdfd" fill-opacity="1"
+            <path fill="#010409" fill-opacity="1"
                 d="M0,96L48,112.3C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,154.7C960,171,1056,181,1152,165.3C1248,149,1344,107,1392,85.3L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z">
             </path>
         </svg>
@@ -192,6 +135,7 @@
                                 Government of India initiative that helps MSMEs improve product quality and reduce
                                 environmental impact. It certifies that a business follows high-quality manufacturing
                                 practices while being environment-friendly, efficient, and compliant with standards.</p>
+
                             <a href="certification.html" class="learn-more-btn"
                                 style="display: inline-block; margin-top: 15px; color: var(--primary-color); font-weight: 600; text-decoration: none;"><span
                                     data-translate="learn_more">Learn More</span> <i class="fas fa-arrow-right"
@@ -205,6 +149,7 @@
                                 improvements, documentation, compliance requirements, and best practices. It supports
                                 MSMEs
                                 in improving quality, efficiency, and sustainability as per ZED standards.</p>
+
                             <a href="consulting.html" class="learn-more-btn"
                                 style="display: inline-block; margin-top: 15px; color: var(--primary-color); font-weight: 600; text-decoration: none;"><span
                                     data-translate="learn_more">Learn More</span> <i class="fas fa-arrow-right"
@@ -217,6 +162,7 @@
                                 business’s quality systems, processes, and environmental practices are reviewed to check
                                 their readiness and compliance with ZED Certification standards. It identifies gaps and
                                 improvement areas before certification.</p>
+
                             <a href="assessment.html" class="learn-more-btn"
                                 style="display: inline-block; margin-top: 15px; color: var(--primary-color); font-weight: 600; text-decoration: none;"><span
                                     data-translate="learn_more">Learn More</span> <i class="fas fa-arrow-right"
@@ -338,16 +284,17 @@
                         <span class="metric-trend success"><i class="fas fa-arrow-up"></i> 0%</span>
                     </div>
                 </div>
+                <!-- Main Charts inside mockups -->
+                <div class="saas-ui-mockup chart-container-large animate-on-scroll" style="animation: none; transform: none; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
 
-                <!-- Main Charts -->
-                <div class="chart-container-large animate-on-scroll">
                     <div class="chart-header">
                         <h2 data-translate="chart_performance">Operational Excellence Index</h2>
                     </div>
                     <canvas id="performanceChart"></canvas>
                 </div>
 
-                <div class="chart-container-side animate-on-scroll">
+                <div class="saas-ui-mockup chart-container-side animate-on-scroll" style="animation: none; transform: none; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+
                     <div class="chart-header">
                         <h2 data-translate="chart_services">ZED Certification Progress</h2>
                         <!-- Year selector removed as chart now shows all years -->
@@ -404,26 +351,23 @@
                 <div class="contact-form-wrapper animate-on-scroll delay-200">
                     <form id="contactForm" class="contact-form">
                         <div class="form-row">
-                            <div class="form-group" style="flex: 1;">
+                            <div class="form-group floating-group">
+                                <input type="text" id="name" name="name" required placeholder=" ">
                                 <label for="name" data-translate="form_name">Name</label>
-                                <input type="text" id="name" name="name" required placeholder="Your Name">
                             </div>
-                            <div class="form-group" style="flex: 1;">
+                            <div class="form-group floating-group">
+                                <input type="email" id="email" name="email" required placeholder=" ">
                                 <label for="email" data-translate="form_email">Email</label>
-                                <input type="email" id="email" name="email" required placeholder="your@email.com">
                             </div>
                         </div>
                         <div class="form-row">
-                            <div class="form-group" style="flex: 1;">
+                            <div class="form-group floating-group">
+                                <input type="tel" id="phone" name="phone" required value="+91" placeholder=" ">
                                 <label for="phone" data-translate="form_phone">Phone Number</label>
-                                <input type="tel" id="phone" name="phone" required value="+91"
-                                    placeholder="+91 XXX XXX XXXX">
                             </div>
-                            <div class="form-group" style="flex: 1;">
-                                <label for="service" data-translate="form_service">Service Interested In</label>
+                            <div class="form-group floating-group">
                                 <select id="service" name="service" required>
-                                    <option value="" disabled selected data-translate="form_select_service">Select a
-                                        Service</option>
+                                    <option value="" disabled selected></option>
                                     <option value="Zed Certification" data-translate="service1_title">Zed Certification
                                     </option>
                                     <option value="ISO" data-translate="service2_title">ISO</option>
@@ -438,12 +382,13 @@
                                     <option value="Software Solutions" data-translate="service8_title">Software
                                         Solutions</option>
                                 </select>
+                                <label for="service" data-translate="form_service">Service Interested In</label>
+                                <i class="fas fa-chevron-down" style="position: absolute; right: 15px; top: 18px; color: #94a3b8; pointer-events: none;"></i>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group floating-group">
+                            <textarea id="message" name="message" rows="4" required placeholder=" "></textarea>
                             <label for="message" data-translate="form_message">Message</label>
-                            <textarea id="message" name="message" rows="4" required
-                                placeholder="How can we help you?"></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary" data-translate="form_submit">Send Message</button>
                     </form>
@@ -453,63 +398,8 @@
     </section>
 
 
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-column footer-logo-section">
-                <img src="assets/navabharatha_logo.png" alt="Navabharatha Logo">
-                <p class="footer-tagline" data-translate="footer_tagline">Vision to Increase Efficiency</p>
-            </div>
-            <div class="footer-column">
-                <h2 class="footer-heading" data-translate="footer_about_title">About Us</h2>
-                <div class="footer-links">
-                    <p class="footer-about-text" data-translate="footer_about_text">
-                        NAVABHARATHA is a sustainable organization focused on consistency and growth, delivering
-                        reliable solutions and long-term value.
-                    </p>
-                </div>
-            </div>
-            <div class="footer-column" style="flex: 0 0 200px;">
-                <h2 class="footer-heading" data-translate="footer_links_title">Quick Links</h2>
-                <div class="footer-links">
-                    <ul>
-                        <li><a href="index.html#home" data-translate="nav_home">Home</a></li>
-
-                        <li><a href="index.html#services" data-translate="nav_services">Services</a></li>
-                        <li><a href="index.html#dashboard" data-translate="nav_dashboard">Dashboard</a></li>
-                        <li><a href="career.html" data-translate="nav_career">Career</a></li>
-                        <li><a href="index.html#contact" data-translate="nav_contact">Contact</a></li>
-                    </ul>
-                </div>
-            </div>
-            <!-- Support -->
-            <div class="footer-column">
-                <h2 class="footer-heading" data-translate="footer_support_title">Support</h2>
-                <div class="footer-links">
-                    <ul>
-                        <li><a href="terms.html" data-translate="footer_terms">Terms and Conditions</a></li>
-                        <li><a href="privacy.html" data-translate="footer_privacy">Privacy Policy</a></li>
-                        <li><a href="career.html" data-translate="career_link">Career</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div> <!-- End footer-content -->
-        <div class="footer-bottom">
-            <div class="container footer-social-container">
-                <h2 class="footer-heading" data-translate="footer_social_title">Follow Us</h2>
-                <div class="social-icons">
-                    <a href="https://www.facebook.com/share/1SLmz1mbFB/" class="social-icon" target="_blank"
-                        rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
-                    <a href="https://www.linkedin.com/in/navabharatha-sustainable-organization-523534393?utm_source=share_via&utm_content=profile&utm_medium=member_android"
-                        class="social-icon" target="_blank" rel="noopener noreferrer"><i
-                            class="fab fa-linkedin-in"></i></a>
-                    <a href="https://www.instagram.com/navabharatha_sustainable?igsh=MTc2eTA4OWltYnZscQ=="
-                        class="social-icon" target="_blank" rel="noopener noreferrer"><i
-                            class="fab fa-instagram"></i></a>
-                </div>
-            </div>
-        </div>
-    </footer>
+    
+    <div id="footer-placeholder"></div>
 
     <script src="translations.js"></script>
     <script src="script.js"></script>

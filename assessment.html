@@ -5,8 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ZED Assessment - Navabharatha</title>
-    <meta name="description"
-        content="ZED Assessment services to evaluate quality systems and ensure ZED certification readiness.">
+    <meta name="description" content="Detailed information about the ZED Assessment process.">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon.png">
 
     <!-- Stylesheets -->
@@ -17,7 +16,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&display=swap" rel="stylesheet">
     <style>
-        /* Sidebar Layout - Inlined (matching consulting.html) */
+        /* Sidebar Layout - Inlined */
         .page-container {
             display: flex;
             max-width: 1200px;
@@ -87,7 +86,6 @@
             color: var(--primary-color);
         }
 
-        /* Content Area styles handled by global or similar classes, simplified here to match consulting structure */
         .content-area {
             background: white;
             padding: 50px 60px;
@@ -96,6 +94,7 @@
             box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
             position: relative;
             z-index: 2;
+            flex: 1;
         }
 
         .content-area h2 {
@@ -146,55 +145,17 @@
             font-family: serif;
         }
 
-        /* Documents in Sidebar */
-        .sidebar-documents {
-            margin-top: 30px;
-            background-color: #f0f9ff;
-            padding: 20px;
-            border-radius: 8px;
-            border: 1px solid #bae6fd;
-        }
-
-        .sidebar-documents h2 {
-            margin-bottom: 15px;
-            color: var(--primary-color);
-            font-size: 1.1rem;
-        }
-
-        .sidebar-documents ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .sidebar-documents li {
-            margin-bottom: 10px;
-        }
-
-        .sidebar-documents a {
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-            text-decoration: none;
-            color: var(--text-color);
-            font-size: 0.9rem;
-            line-height: 1.4;
-            transition: color 0.2s;
-        }
-
-        .sidebar-documents a:hover {
-            color: var(--primary-color);
-        }
-
-        .sidebar-documents i {
-            color: #ef4444;
-            margin-top: 3px;
-        }
-
         /* Responsive Sidebar */
         @media (max-width: 992px) {
             .page-container {
                 flex-direction: column;
                 margin-top: 30px;
+                min-height: auto;
+            }
+
+            .content-area {
+                padding: 30px 20px;
+                min-height: auto;
             }
 
             .sidebar {
@@ -276,75 +237,12 @@
 </head>
 
 <body>
-    <!-- Header / Navbar -->
-    <header>
-        <!-- Top Header with Logo -->
-        <div class="top-header">
-            <div class="container top-header-container">
-                <a href="index.html" class="logo">
-                    <img src="assets/navabharatha_logo.png" alt="Navabharatha">
-                </a>
-                <div class="zed-branding">
-                    <h2 class="branding-title">NAVABHARATHA</h2>
-                    <p>SUSTAINABLE ORGANIZATION FOR CONSISTENCY</p>
-                    <small>REGSTD. 2023</small>
-                </div>
-            </div>
-        </div>
-    </header>
+    <div id="header-placeholder"></div>
 
     <div class="hero-bg-blobs">
         <div class="blob blob-1"></div>
         <div class="blob blob-2"></div>
         <div class="blob blob-3"></div>
-    </div>
-
-    <!-- Main Navigation Bar -->
-    <div class="main-nav">
-        <div class="container main-nav-container">
-
-            <div class="nav-left-group">
-                <button class="back-btn" onclick="goBack()" aria-label="Go Back">
-                    <i class="fas fa-arrow-left"></i>
-                </button>
-            </div>
-
-            <nav>
-                <ul class="nav-menu" id="navMenu">
-                    <li><a href="index.html#home" data-translate="nav_home"><i class="fas fa-home mobile-home-icon"></i>
-                            Home</a>
-                    </li>
-                    <li><a href="index.html#services" data-translate="nav_services">Services</a></li>
-                    <li><a href="index.html#dashboard" data-translate="nav_dashboard">Dashboard</a></li>
-                    <li><a href="career.html" data-translate="nav_career">Career</a></li>
-                    <li><a href="index.html#contact" data-translate="nav_contact">Contact</a></li>
-                </ul>
-            </nav>
-
-            <div class="nav-right">
-                <!-- Language Selector -->
-                <div class="language-selector desktop-lang-selector">
-                    <button class="lang-btn" id="langBtn" aria-label="Select Language">
-                        <i class="fas fa-globe"></i>
-                        <span id="currentLang" class="current-lang-text">EN</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="language-dropdown" id="langDropdown">
-                        <div class="lang-option" data-lang="en">English</div>
-                        <div class="lang-option" data-lang="kn">ಕನ್ನಡ (Kannada)</div>
-                        <div class="lang-option" data-lang="hi">हिंदी (Hindi)</div>
-                        <div class="lang-option" data-lang="ta">தமிழ் (Tamil)</div>
-                        <div class="lang-option" data-lang="te">తెలుగు (Telugu)</div>
-                        <div class="lang-option" data-lang="mr">मराठी (Marathi)</div>
-                        <div class="lang-option" data-lang="ml">മലയാളം (Malayalam)</div>
-                    </div>
-                </div>
-
-                <button class="hamburger" id="hamburger" aria-label="Menu">
-                    <i class="fas fa-bars"></i>
-                </button>
-            </div>
-        </div>
     </div>
 
     <!-- Page Content -->
@@ -354,8 +252,8 @@
             <h2 data-translate="assessment_title" class="page-header-title"
                 style="font-size: 3rem; margin-bottom: 15px;">ZED Assessment</h2>
             <p data-translate="assessment_subtitle"
-                style="font-size: 1.2rem; color: #64748b; max-width: 700px; margin: 0 auto;">Comprehensive Evaluation
-                for Certification Readiness</p>
+                style="font-size: 1.2rem; color: #64748b; max-width: 700px; margin: 0 auto;">Comprehensive Evaluation for
+                MSME Sustainability</p>
         </div>
     </section>
 
@@ -363,61 +261,54 @@
         <!-- Sidebar -->
         <aside class="sidebar">
             <div class="sidebar-toggle" onclick="toggleSidebarMenu()" aria-label="Toggle Sidebar Menu">
-                <span id="sidebarToggleText" data-translate="sidebar_overview">OVERVIEW</span>
+                <span id="sidebarToggleText" data-translate="sidebar_assessment_process">ASSESSMENT PROCESS</span>
                 <i class="fas fa-chevron-down" id="sidebarToggleIcon"></i>
             </div>
             <ul class="sidebar-nav" id="sidebarNav">
-                <li><a href="#overview" onclick="showSection('overview')" class="active"
-                        data-translate="sidebar_overview"><span><i class="fas fa-info-circle"
-                                style="width: 20px; margin-right: 12px;"></i> OVERVIEW</span> <i
-                            class="fas fa-chevron-right"></i></a></li>
-                <li><a href="#process" onclick="showSection('process')"
-                        data-translate="sidebar_assessment_process"><span><i class="fas fa-sync"
+                <li><a href="#process" onclick="showSection('process')" class="active"
+                        data-translate="sidebar_assessment_process"><span><i class="fas fa-tasks"
                                 style="width: 20px; margin-right: 12px;"></i> ASSESSMENT PROCESS</span> <i
+                            class="fas fa-chevron-right"></i></a></li>
+                <li><a href="#parameters" onclick="showSection('parameters')"
+                        data-translate="sidebar_assessment_parameters"><span><i class="fas fa-list-check"
+                                style="width: 20px; margin-right: 12px;"></i> PARAMETERS</span> <i
                             class="fas fa-chevron-right"></i></a>
                 </li>
-                <li><a href="#benefits" onclick="showSection('benefits')" data-translate="sidebar_benefits"><span><i
-                                class="fas fa-award" style="width: 20px; margin-right: 12px;"></i> BENEFITS</span> <i
-                            class="fas fa-chevron-right"></i></a></li>
+                <li><a href="#agencies" onclick="showSection('agencies')" data-translate="sidebar_assessment_agencies"><span><i
+                                class="fas fa-building-circle-check" style="width: 20px; margin-right: 12px;"></i>
+                            AGENCIES</span> <i class="fas fa-chevron-right"></i></a></li>
             </ul>
         </aside>
 
         <!-- Main Content -->
         <main style="flex-grow: 1;">
             <div class="content-area">
-                <div id="overview" class="content-section active">
-                    <h2 data-translate="assessment_overview_title">Overview</h2>
-                    <p data-translate="assessment_overview_p1">ZED Assessment is a critical step in your certification
-                        journey. It involves a detailed
-                        evaluation of your business processes, quality standards, and environmental impact against the
-                        ZED maturity model.</p>
-                    <p data-translate="assessment_overview_p2">Our assessment services help you identify gaps in your
-                        current system and provide a roadmap to
-                        bridge them, ensuring you meet the requirements for Bronze, Silver, or Gold certification.</p>
+                <div id="process" class="content-section active">
+                    <h2 data-translate="assessment_process_title">Assessment Process</h2>
+                    <p data-translate="assessment_process_p1">The ZED Assessment is an evaluation of an MSME's systems
+                        and processes against the defined parameters of the Zero Defect Zero Effect scheme. It is
+                        conducted by accredited assessment agencies.</p>
                 </div>
 
-                <div id="process" class="content-section">
-                    <h2 data-translate="assessment_process_title">Assessment Process</h2>
+                <div id="parameters" class="content-section">
+                    <h2 data-translate="assessment_params_title">Assessment Parameters</h2>
+                    <p data-translate="assessment_params_p1">The parameters vary based on the certification level
+                        applied for:</p>
                     <ul>
-                        <li data-translate="assessment_process_li1"><strong>Self-Assessment:</strong> Initial review
-                            based on online parameters.</li>
-                        <li data-translate="assessment_process_li2"><strong>Desktop Assessment:</strong> Verification of
-                            documents and evidence submitted
-                            online.</li>
-                        <li data-translate="assessment_process_li3"><strong>Site Assessment:</strong> For Silver and
-                            Gold levels, physical verification of the
-                            facility.</li>
-                        <li data-translate="assessment_process_li4"><strong>Report Generation:</strong> Detailed report
-                            highlighting strengths and areas for
-                            improvement.</li>
+                        <li data-translate="assessment_params_li1"><strong>Bronze:</strong> Focuses on foundational
+                            parameters of quality and environment.</li>
+                        <li data-translate="assessment_params_li2"><strong>Silver:</strong> Includes more advanced
+                            parameters for process improvement.</li>
+                        <li data-translate="assessment_params_li3"><strong>Gold:</strong> The highest level, covering all
+                            critical ZED maturity parameters.</li>
                     </ul>
                 </div>
 
-                <div id="benefits" class="content-section">
-                    <h2 data-translate="assessment_benefits_title">Benefits of Assessment</h2>
-                    <p data-translate="assessment_benefits_p1">A rigorous assessment not only prepares you for
-                        certification but also highlights operational
-                        inefficiencies, helping you reduce waste, improve quality, and increase profitability.</p>
+                <div id="agencies" class="content-section">
+                    <h2 data-translate="assessment_agencies_title">Accredited Agencies</h2>
+                    <p data-translate="assessment_agencies_p1">Assessments are carried out by agencies accredited by the
+                        Quality Council of India (QCI) to ensure objectivity and standardized evaluation across the
+                        country.</p>
                 </div>
             </div>
 
@@ -428,63 +319,7 @@
         </main>
     </div>
 
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-column footer-logo-section">
-                <img src="assets/navabharatha_logo.png" alt="Navabharatha Logo">
-                <p class="footer-tagline" data-translate="footer_tagline">Vision to Increase Efficiency</p>
-            </div>
-            <div class="footer-column">
-                <h2 class="footer-heading" data-translate="footer_about_title">About Us</h2>
-                <div class="footer-links">
-                    <p class="footer-about-text" data-translate="footer_about_text">
-                        NAVABHARATHA is a sustainable organization focused on consistency and growth, delivering
-                        reliable solutions and long-term value.
-                    </p>
-                </div>
-            </div>
-            <div class="footer-column" style="flex: 0 0 200px;">
-                <h2 class="footer-heading" data-translate="footer_links_title">Quick Links</h2>
-                <div class="footer-links">
-                    <ul>
-                        <li><a href="index.html#home" data-translate="nav_home">Home</a></li>
-
-                        <li><a href="index.html#services" data-translate="nav_services">Services</a></li>
-                        <li><a href="index.html#dashboard" data-translate="nav_dashboard">Dashboard</a></li>
-                        <li><a href="career.html" data-translate="nav_career">Career</a></li>
-                        <li><a href="index.html#contact" data-translate="nav_contact">Contact</a></li>
-                    </ul>
-                </div>
-            </div>
-            <!-- Support -->
-            <div class="footer-column">
-                <h2 class="footer-heading" data-translate="footer_support_title">Support</h2>
-                <div class="footer-links">
-                    <ul>
-                        <li><a href="terms.html" data-translate="footer_terms">Terms and Conditions</a></li>
-                        <li><a href="privacy.html" data-translate="footer_privacy">Privacy Policy</a></li>
-                        <li><a href="career.html" data-translate="career_link">Career</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <div class="footer-social-container">
-                <h2 class="footer-heading" data-translate="footer_social_title">Follow Us</h2>
-                <div class="social-icons">
-                    <a href="https://www.facebook.com/share/1SLmz1mbFB/" class="social-icon" target="_blank"
-                        rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
-                    <a href="https://www.linkedin.com/in/navabharatha-sustainable-organization-523534393?utm_source=share_via&utm_content=profile&utm_medium=member_android"
-                        class="social-icon" target="_blank" rel="noopener noreferrer"><i
-                            class="fab fa-linkedin-in"></i></a>
-                    <a href="https://www.instagram.com/navabharatha_sustainable?igsh=MTc2eTA4OWltYnZscQ=="
-                        class="social-icon" target="_blank" rel="noopener noreferrer"><i
-                            class="fab fa-instagram"></i></a>
-                </div>
-            </div>
-        </div>
-    </footer>
+    <div id="footer-placeholder"></div>
 
     <script>
         function toggleSidebarMenu() {

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Website Inquiry - Navabharatha</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f1f5f9;
+            color: #1e293b;
+        }
+        .admin-email-wrapper {
+            width: 100%;
+            padding: 30px 0;
+        }
+        .admin-email-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e2e8f0;
+        }
+        .admin-header {
+            background-color: #0E5E72;
+            padding: 30px;
+            text-align: center;
+        }
+        .admin-header h1 {
+            color: #ffffff;
+            margin: 10px 0 0;
+            font-size: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .admin-header img {
+            height: 40px;
+        }
+        .admin-body {
+            padding: 40px;
+        }
+        .inquiry-status {
+            display: inline-block;
+            background-color: #E5B028;
+            color: #ffffff;
+            padding: 6px 16px;
+            border-radius: 99px;
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 25px;
+        }
+        .info-grid {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+        }
+        .info-row {
+            border-bottom: 1px solid #f1f5f9;
+        }
+        .info-label {
+            padding: 12px 0;
+            color: #64748b;
+            font-size: 14px;
+            width: 35%;
+            font-weight: 500;
+        }
+        .info-value {
+            padding: 12px 0;
+            color: #1e293b;
+            font-size: 15px;
+            font-weight: 600;
+        }
+        .message-section {
+            background-color: #f8fafc;
+            padding: 25px;
+            border-radius: 8px;
+            border-left: 4px solid #E5B028;
+        }
+        .message-title {
+            color: #0E5E72;
+            font-weight: 700;
+            font-size: 15px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            display: block;
+        }
+        .message-text {
+            color: #334155;
+            font-size: 15px;
+            line-height: 1.6;
+            margin: 0;
+        }
+        .admin-footer {
+            background-color: #105469;
+            padding: 20px;
+            text-align: center;
+            font-size: 12px;
+            color: #ffffff;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-email-wrapper">
+        <div class="admin-email-container">
+            <div class="admin-header">
+                <img src="https://navabharatha.com/assets/navabharatha_logo.png" alt="Navabharatha">
+                <h1>New Website Inquiry</h1>
+            </div>
+            <div class="admin-body">
+                <div class="inquiry-status">ACTION REQUIRED</div>
+                
+                <table class="info-grid">
+                    <tr class="info-row">
+                        <td class="info-label">Customer Name</td>
+                        <td class="info-value">{{name}}</td>
+                    </tr>
+                    <tr class="info-row">
+                        <td class="info-label">Email Address</td>
+                        <td class="info-value"><a href="mailto:{{email}}" style="color: #0E5E72; text-decoration: none;">{{email}}</a></td>
+                    </tr>
+                    <tr class="info-row">
+                        <td class="info-label">Phone Number</td>
+                        <td class="info-value">{{phone}}</td>
+                    </tr>
+                    <tr class="info-row">
+                        <td class="info-label">Interested Service</td>
+                        <td class="info-value" style="color: #E5B028;">{{service}}</td>
+                    </tr>
+                </table>
+
+                <div class="message-section">
+                    <span class="message-title">Customer Message</span>
+                    <p class="message-text">{{message}}</p>
+                </div>
+            </div>
+            <div class="admin-footer">
+                <p>This inquiry was sent from the contact form on <a href="https://www.navabharatha.com" style="color: #0E5E72;">www.navabharatha.com</a></p>
+                <p>&copy; 2026 Navabharatha Sustainable Organization. All rights reserved.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

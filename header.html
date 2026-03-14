@@ -1,0 +1,71 @@
+<header>
+    <!-- Top Header with Logo -->
+    <div class="top-header">
+        <div class="container top-header-container">
+            <a href="index.html" class="logo">
+                <img src="assets/navabharatha_logo.png" alt="Navabharatha">
+            </a>
+            <div class="zed-branding">
+                <h2 class="branding-title">NAVABHARATHA</h2>
+                <p>SUSTAINABLE ORGANIZATION FOR CONSISTENCY</p>
+                <small>REGSTD. 2023</small>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Main Navigation Bar -->
+<div class="main-nav" id="mainNavElement">
+    <div class="container main-nav-container">
+
+        <div class="nav-left-group">
+            <a href="index.html" class="back-btn" id="headerBackBtn" style="display: none;" aria-label="Go Back">
+                <i class="fas fa-arrow-left"></i>
+            </a>
+        </div>
+
+        <nav>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html#home" data-translate="nav_home"><i class="fas fa-home mobile-home-icon"></i> Home</a></li>
+                <li><a href="index.html#services" data-translate="nav_services">Services</a></li>
+                <li><a href="index.html#dashboard" data-translate="nav_dashboard">Dashboard</a></li>
+                <li><a href="index.html#contact" data-translate="nav_contact">Contact</a></li>
+            </ul>
+        </nav>
+
+        <div class="nav-right">
+            <!-- Language Selector -->
+            <div class="language-selector desktop-lang-selector">
+                <button class="lang-btn" id="langBtn" aria-label="Select Language">
+                    <i class="fas fa-globe"></i>
+                    <span id="currentLang" class="current-lang-text">EN</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="language-dropdown" id="langDropdown">
+                    <div class="lang-option" data-lang="en">English</div>
+                    <div class="lang-option" data-lang="kn">ಕನ್ನಡ (Kannada)</div>
+                    <div class="lang-option" data-lang="hi">हिंदी (Hindi)</div>
+                    <div class="lang-option" data-lang="ta">தமிழ் (Tamil)</div>
+                    <div class="lang-option" data-lang="te">తెలుగు (Telugu)</div>
+                    <div class="lang-option" data-lang="mr">मराठी (Marathi)</div>
+                    <div class="lang-option" data-lang="ml">മലയാളം (Malayalam)</div>
+                </div>
+            </div>
+
+            <div class="search-container">
+                <input type="text" id="searchInput" class="search-input" placeholder="Search..."
+                    data-translate="search_placeholder">
+                <button class="voice-search-btn" id="voiceSearchBtn" aria-label="Voice Search">
+                    <i class="fas fa-microphone"></i>
+                </button>
+                <button class="search-btn" id="searchBtn" aria-label="Search">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </div>
+</div>
