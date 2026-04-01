@@ -16,10 +16,19 @@
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="notification.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&display=swap" rel="stylesheet">
+
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function () {
+            emailjs.init("Es0E-AaOSTq08q3Fv");
+        })();
+    </script>
 
     <style>
         /* Career page specific tweaks if any */
@@ -27,7 +36,8 @@
 </head>
 
 <body>
-    
+    <div id="customNotification" class="custom-notification"></div>
+
     <div id="header-placeholder"></div>
 
     <!-- Visionary Hero Section -->
@@ -98,12 +108,62 @@
                 <h2 data-translate="career_openings_title">Shape the Future With Us</h2>
             </div>
 
-            <div class="no-openings-container">
-                <div class="no-openings-content">
-                    <i class="fas fa-search"></i>
-                    <h3 data-translate="no_openings_text">NO opening right now</h3>
-                    <p data-translate="no_openings_sub">We are currently not hiring, but we are always looking for
-                        exceptional talent. Feel free to connect with us!</p>
+            <div class="openings-grid">
+                <!-- Field Survey Officer Card -->
+                <div class="opening-card animate-on-scroll delay-100">
+                    <div class="opening-badge">17 Openings</div>
+                    <h3 data-translate="job1_title">Field Survey Officer</h3>
+                    <div class="opening-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Tiruppur, Coimbatore, Salem, Erode</span>
+                    </div>
+                    <ul class="opening-details">
+                        <li><i class="fas fa-check-circle"></i> Excellent communication skills</li>
+                        <li><i class="fas fa-check-circle"></i> Fluent in Tamil</li>
+                        <li><i class="fas fa-check-circle"></i> Basic English or Hindi</li>
+                        <li><i class="fas fa-motorcycle"></i> 2 wheeler must</li>
+                        <li><i class="fas fa-user-clock"></i> Age 21+</li>
+                    </ul>
+                    <div class="opening-salary">₹25,000+ Incentives</div>
+                    <button class="btn-opening-apply" onclick="openApplyModal('Field Survey Officer')"
+                        data-translate="apply_now">Apply Now</button>
+                </div>
+
+                <!-- Lead Officer Card -->
+                <div class="opening-card animate-on-scroll delay-200">
+                    <div class="opening-badge">04 Openings</div>
+                    <h3 data-translate="job2_title">Lead Officer</h3>
+                    <div class="opening-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Tiruppur, Coimbatore, Salem, Erode</span>
+                    </div>
+                    <ul class="opening-details">
+                        <li><i class="fas fa-check-circle"></i> Excellent communication skills</li>
+                        <li><i class="fas fa-check-circle"></i> Fluent in Tamil</li>
+                        <li><i class="fas fa-check-circle"></i> Basic English or Hindi</li>
+                        <li><i class="fas fa-motorcycle"></i> 2 wheeler must</li>
+                        <li><i class="fas fa-user-clock"></i> Age 21+</li>
+                    </ul>
+                    <div class="opening-salary">₹25,000+ Incentives</div>
+                    <button class="btn-opening-apply" onclick="openApplyModal('Lead Officer')"
+                        data-translate="apply_now">Apply Now</button>
+                </div>
+            </div>
+
+            <!-- Recruitment Contact Info -->
+            <div style="margin-top: 50px; text-align: center; background: white; padding: 30px; border-radius: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.02);"
+                class="animate-on-scroll">
+                <h4 style="color: var(--primary-color); margin-bottom: 20px; font-size: 1.2rem;">Direct Recruitment
+                    Contact</h4>
+                <div style="display: flex; justify-content: center; gap: 40px; flex-wrap: wrap;">
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <i class="fas fa-phone-alt" style="color: var(--accent-color);"></i>
+                        <span style="font-weight: 600;">7829546792 / 8850120709</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <i class="fas fa-envelope" style="color: var(--accent-color);"></i>
+                        <span style="font-weight: 600;">hr@navabharatha.com</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -121,7 +181,442 @@
         </div>
     </section>
 
-    
+    <!-- ===== APPLICATION MODAL ===== -->
+    <div id="applyModal" class="apply-modal-overlay" onclick="handleOverlayClick(event)">
+        <div class="apply-modal-card">
+            <!-- Header -->
+            <div class="apply-modal-header">
+                <div class="apply-modal-icon"><i class="fas fa-briefcase"></i></div>
+                <div>
+                    <h3 class="apply-modal-title">Apply Now</h3>
+                    <p class="apply-modal-subtitle" id="applyJobTitle">Field Survey Officer</p>
+                </div>
+                <button class="apply-modal-close" onclick="closeApplyModal()" aria-label="Close"><i
+                        class="fas fa-times"></i></button>
+            </div>
+
+            <!-- Form -->
+            <form id="applyForm" class="apply-modal-form" onsubmit="submitApplication(event)">
+                <div class="apply-form-group">
+                    <label for="applyName"><i class="fas fa-user"></i> Full Name</label>
+                    <input type="text" id="applyName" name="name" placeholder="Enter your full name" required>
+                </div>
+                <div class="apply-form-group">
+                    <label for="applyPhone"><i class="fas fa-phone-alt"></i> Contact Number</label>
+                    <input type="tel" id="applyPhone" name="phone" placeholder="+91 XXXXX XXXXX" required>
+                </div>
+                <div class="apply-form-group">
+                    <label for="applyEmail"><i class="fas fa-envelope"></i> Email Address</label>
+                    <input type="email" id="applyEmail" name="email" placeholder="your@email.com" required>
+                </div>
+                <div class="apply-form-group">
+                    <label for="applyResume"><i class="fas fa-paperclip"></i> Attach Resume</label>
+                    <div class="apply-file-wrapper">
+                        <input type="file" id="applyResume" name="resume" accept=".pdf,.doc,.docx" required
+                            onchange="updateFileName(this)">
+                        <div class="apply-file-label" onclick="document.getElementById('applyResume').click()">
+                            <i class="fas fa-upload"></i>
+                            <span id="applyFileName">Click to upload (PDF, DOC, DOCX)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Buttons -->
+                <div class="apply-modal-actions">
+                    <button type="button" class="apply-btn-cancel" onclick="closeApplyModal()">Cancel</button>
+                    <button type="submit" class="apply-btn-submit"><i class="fas fa-paper-plane"></i> Submit
+                        Application</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <style>
+        /* ===== APPLY MODAL STYLES ===== */
+        .apply-modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(3, 27, 38, 0.65);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .apply-modal-overlay.active {
+            display: flex;
+        }
+
+        .apply-modal-card {
+            background: #ffffff;
+            border-radius: 24px;
+            width: 100%;
+            max-width: 480px;
+            margin: 20px;
+            box-shadow: 0 30px 80px rgba(3, 27, 38, 0.25);
+            animation: applySlideUp 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            overflow: hidden;
+        }
+
+        @keyframes applySlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px) scale(0.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .apply-modal-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 24px 28px 20px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+            background: linear-gradient(135deg, #0e5e72 0%, #105469 100%);
+        }
+
+        .apply-modal-icon {
+            width: 46px;
+            height: 46px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: #fff;
+            flex-shrink: 0;
+        }
+
+        .apply-modal-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #fff;
+            margin: 0;
+            font-family: var(--font-body, 'Inter', sans-serif);
+        }
+
+        .apply-modal-subtitle {
+            font-size: 0.82rem;
+            color: rgba(255, 255, 255, 0.75);
+            margin: 2px 0 0;
+            font-weight: 500;
+        }
+
+        .apply-modal-close {
+            margin-left: auto;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+            flex-shrink: 0;
+        }
+
+        .apply-modal-close:hover {
+            background: rgba(255, 255, 255, 0.28);
+        }
+
+        .apply-modal-form {
+            padding: 24px 28px 28px;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .apply-form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .apply-form-group label {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: #0e5e72;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .apply-form-group label i {
+            font-size: 0.9rem;
+            color: #E5B028;
+        }
+
+        .apply-form-group input[type="text"],
+        .apply-form-group input[type="tel"],
+        .apply-form-group input[type="email"] {
+            padding: 12px 16px;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            color: #1e293b;
+            font-family: var(--font-body, 'Inter', sans-serif);
+            transition: border 0.2s, box-shadow 0.2s;
+            outline: none;
+            background: #f8fafc;
+        }
+
+        .apply-form-group input:focus {
+            border-color: #0e5e72;
+            box-shadow: 0 0 0 4px rgba(14, 94, 114, 0.1);
+            background: #fff;
+        }
+
+        /* File upload */
+        .apply-file-wrapper input[type="file"] {
+            display: none;
+        }
+
+        .apply-file-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 16px;
+            border: 1.5px dashed #0e5e72;
+            border-radius: 12px;
+            cursor: pointer;
+            background: #f0f9fc;
+            color: #0e5e72;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: background 0.2s, border-color 0.2s;
+        }
+
+        .apply-file-label:hover {
+            background: #e0f4f8;
+            border-color: #0a4a5a;
+        }
+
+        .apply-file-label i {
+            color: #E5B028;
+            font-size: 1rem;
+        }
+
+        #applyFileName {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        /* Action buttons */
+        .apply-modal-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 4px;
+        }
+
+        .apply-btn-cancel {
+            flex: 1;
+            padding: 13px;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 12px;
+            background: #fff;
+            color: #64748b;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: var(--font-body, 'Inter', sans-serif);
+        }
+
+        .apply-btn-cancel:hover {
+            border-color: #94a3b8;
+            color: #334155;
+            background: #f8fafc;
+        }
+
+        .apply-btn-submit {
+            flex: 2;
+            padding: 13px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #0e5e72 0%, #105469 100%);
+            color: #fff;
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-family: var(--font-body, 'Inter', sans-serif);
+            letter-spacing: 0.3px;
+        }
+
+        .apply-btn-submit:hover {
+            background: linear-gradient(135deg, #0a4a5a 0%, #0e5e72 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(14, 94, 114, 0.3);
+        }
+
+        .apply-btn-submit:active {
+            transform: translateY(0);
+        }
+    </style>
+
+    <script>
+        let currentJob = '';
+
+        function openApplyModal(jobTitle) {
+            currentJob = jobTitle;
+            document.getElementById('applyJobTitle').textContent = jobTitle;
+            document.getElementById('applyForm').reset();
+            document.getElementById('applyFileName').textContent = 'Click to upload (PDF, DOC, DOCX)';
+            document.getElementById('applyModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeApplyModal() {
+            document.getElementById('applyModal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function handleOverlayClick(e) {
+            if (e.target === document.getElementById('applyModal')) closeApplyModal();
+        }
+
+        function updateFileName(input) {
+            const el = document.getElementById('applyFileName');
+            el.textContent = input.files.length ? input.files[0].name : 'Click to upload (PDF, DOC, DOCX)';
+        }
+
+        async function submitApplication(e) {
+            e.preventDefault();
+            const btn = e.target.querySelector('.apply-btn-submit');
+            const originalText = btn.innerHTML;
+
+            // Name, Phone, Email
+            const name = document.getElementById('applyName').value.trim();
+            const phone = document.getElementById('applyPhone').value.trim();
+            const email = document.getElementById('applyEmail').value.trim();
+            const resumeFile = document.getElementById('applyResume').files[0];
+
+            // 1. Validation (5MB limit & correct extensions)
+            const allowedExtensions = /(\.pdf|\.doc|\.docx)$/i;
+            if (!resumeFile || !allowedExtensions.exec(resumeFile.name)) {
+                showStatusNotification('Please upload a valid PDF, DOC, or DOCX file.', 'error');
+                return;
+            }
+
+            if (resumeFile.size > 5000000) { // 5MB limit
+                showStatusNotification('File too large (Maximum 5MB allowed).', 'error');
+                return;
+            }
+
+            // Show loading state for Drive upload
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading Resume...';
+            btn.disabled = true;
+
+            try {
+                // 2. Convert file to Base64 (Clean string, no prefix)
+                const reader = new FileReader();
+                const base64Data = await new Promise((resolve, reject) => {
+                    reader.onload = () => resolve(reader.result.split(',')[1]);
+                    reader.onerror = error => reject(error);
+                    reader.readAsDataURL(resumeFile);
+                });
+
+                // 3. Upload to Google Drive (Apps Script) - High Performance Raw Method
+                const cleanFileName = `Resume_${name.replace(/\s+/g, '_')}_${resumeFile.name}`;
+                const mimeType = resumeFile.type || "application/pdf";
+
+                // Construct URL with query parameters for the backend to read
+                const gasBaseUrl = 'https://script.google.com/macros/s/AKfycby2Tz6ZohuPlfyh6s6RIpNRPfgAWp_JHYq3BIqGss2HudiH6zMykQHnxkkVUIt7XIoNQQ/exec';
+                const gasUrl = `${gasBaseUrl}?fileName=${encodeURIComponent(cleanFileName)}&mimeType=${encodeURIComponent(mimeType)}`;
+
+                const uploadResponse = await fetch(gasUrl, {
+                    method: 'POST',
+                    body: base64Data // Sending as raw text is more memory-efficient for GAS
+                });
+
+                const uploadResult = await uploadResponse.json();
+
+                if (!uploadResult.success) throw new Error(uploadResult.error || 'Drive upload failed');
+
+                const driveUrl = uploadResult.fileUrl;
+
+                // 4. Send Email via EmailJS with the link
+                btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending Application...';
+
+                const templateParams = {
+                    candidate_name: name,
+                    candidate_email: email,
+                    phone: phone,
+                    resume_link: driveUrl,
+                    resume_name: resumeFile.name,
+                    service: 'JOB APPLICATION: ' + currentJob,
+                    message: `A new application has been received for the position: ${currentJob}. \n\nResume Link: ${driveUrl}`
+                };
+
+                await emailjs.send('service_l1k4lgj', 'template_orlc4at', templateParams);
+
+                // 5. Success UI
+                showStatusNotification('Application submitted successfully!', 'success');
+                e.target.reset();
+                document.getElementById('applyFileName').textContent = 'Click to upload (PDF, DOC, DOCX)';
+
+                setTimeout(() => {
+                    closeApplyModal();
+                    btn.innerHTML = originalText;
+                    btn.disabled = false;
+                }, 1000);
+
+            } catch (error) {
+                console.error('Submission Error:', error);
+                showStatusNotification('Submission failed. Please try again with a smaller file.', 'error');
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }
+        }
+
+        // Helper to show notifications
+        function showStatusNotification(message, type) {
+            const notification = document.getElementById('customNotification');
+            if (notification) {
+                notification.textContent = message;
+                notification.className = `custom-notification ${type} show`;
+                setTimeout(() => notification.classList.remove('show'), 5000);
+            }
+        }
+
+        // Close on Escape key
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') closeApplyModal();
+        });
+
+        // Open modal based on URL Job query param
+        document.addEventListener('DOMContentLoaded', function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const jobParam = urlParams.get('job');
+            if (jobParam) {
+                // Ensure the user is scrolled to the openings section before opening modal
+                const openingsSection = document.getElementById('openings');
+                if (openingsSection) {
+                    openingsSection.scrollIntoView({ behavior: 'smooth' });
+                }
+                setTimeout(() => openApplyModal(jobParam), 300);
+            }
+        });
+    </script>
+
     <div id="footer-placeholder"></div>
     <script src="translations.js"></script>
     <script src="script.js"></script>
